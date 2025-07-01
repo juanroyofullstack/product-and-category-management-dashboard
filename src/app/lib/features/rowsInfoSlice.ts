@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export enum RowState {
     LEFT = 'left',
     CENTER = 'center',
-    RIGHT = 'right',
+    RIGHT = 'end',
 }
 
 const rowMockData: rowsInfo[] = [
