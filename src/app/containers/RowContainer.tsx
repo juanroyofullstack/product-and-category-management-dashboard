@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { Button } from '@mui/material';
 import { addRow, RowState } from '../lib/features/rowsInfoSlice';
+import Row from '../components/Row';
 import { selectRows } from '../lib/selectors/selectors';
 import { useAppSelector, useAppDispatch } from '../lib/hooks';
 
-import Products from '../components/Products';
 
 const RowContainer = () => { 
     const [showAddRow, setShowAddRow] = useState(false);
@@ -19,13 +19,7 @@ const RowContainer = () => {
         <div className="flex flex-col items-center justify-center w-full h-full gap-4">
             {rows.length > 0 ? (
                 rows.map((row) => (
-                    <div key={row.id} className={`flex juatify-${row.state} w-full p-4 border rounded-lg`}>
-                        <h2 className="text-lg font-bold">{row.title}</h2>
-                        <div className="flex flex-wrap items-center justify-center w-full h-full gap-4">
-                            <Products rowId={row.id}/>
-                        </div>
-                    </div>
-                
+                    <Row key={row.id} row={row} />
                 ))) : null}
 
             {!showAddRow && <Button

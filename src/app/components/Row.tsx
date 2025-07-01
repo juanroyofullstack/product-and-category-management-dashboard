@@ -1,24 +1,23 @@
+import CloseIcon from '@mui/icons-material/Close';
 import { rowsInfo} from '../lib/features/rowsInfoSlice';
-import { selectProductsByRow } from '../lib/selectors/selectors';
-import { useAppSelector } from '../lib/hooks';
+import Products from '../components/Products';
 
 const Row = ({ row }:{ row: rowsInfo }) => {
-    const products = useAppSelector(state => selectProductsByRow(state, row.id));
-
     return (
         <div className="flex flex-col items-center justify-center w-full h-full gap-4">
             {row ? (
-                <div key={row.id} className={`flex juatify-${row.state} w-full p-4 border rounded-lg`}>
+                <div key={row.id} className={`flex justify-${row.state} w-full p-4 border rounded-lg`}>
                     <h2 className="text-lg font-bold">{row.title}</h2>
                     <div className="flex flex-wrap items-center justify-center w-full h-full gap-4">
-                        {products && products.map((product) => (
-                            <div key={product.id} className="p-4 border rounded">
-                                {product.title && <h3 className="text-md font-semibold">{product.title}</h3>}
-                            </div>
-                        ))}
-                    </div>
+                        <Products rowId={row.id}/>
+                        <CloseIcon 
+                            className="cursor-pointer text-red-500 hover:text-red-700"
+                            onClick={() => {
+                                // Dispatch action to remove product from row
+                            }}
+                        />
+                    </div>   
                 </div>
-                
             ) : (
                 <p>No rows available</p>
             )}

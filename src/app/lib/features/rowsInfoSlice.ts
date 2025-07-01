@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export enum RowState {
-    LEFT = 'left',
+    LEFT = 'start',
     CENTER = 'center',
     RIGHT = 'end',
 }
