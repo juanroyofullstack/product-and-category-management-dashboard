@@ -30,13 +30,13 @@ export const productsInfoSlice = createSlice({
             state.push(action.payload);
         },
         removeProduct: (state, action: PayloadAction<productsInfo>) => {
-            const productToRemove =  state.find((product) => product.id === action.payload.id);
-            if (productToRemove) {
-                state = state.filter((product) => product.id !== productToRemove.id);
-            }
+            return state.filter((product) => product.id !== action.payload.id);
+        },
+        removeAllProductsAsociatedToRow: (state, action: PayloadAction<string>) => {
+            return state.filter((product) => product.row !==  action.payload);
         },
         updateProduct: (state, action: PayloadAction<productsInfo>) => {
-            state = state.map((product) =>
+            return state.map((product) =>
                 product.id === action.payload.id ? action.payload : product,
             );
         },
@@ -46,6 +46,7 @@ export const productsInfoSlice = createSlice({
 export const {
     addProduct,
     removeProduct,
+    removeAllProductsAsociatedToRow,
     updateProduct,
 } = productsInfoSlice.actions;
 
