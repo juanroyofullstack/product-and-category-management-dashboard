@@ -29,8 +29,8 @@ export const productsInfoSlice = createSlice({
         addProduct: (state, action: PayloadAction<productsInfo>) => {
             state.push(action.payload);
         },
-        removeProduct: (state, action: PayloadAction<productsInfo>) => {
-            state.filter((product) => product.id !== action.payload.id);
+        removeProduct: (state, action: PayloadAction<string>) => {
+            return state.filter((product) => product.id !== action.payload);
         },
         removeAllProductsAsociatedToRow: (state, action: PayloadAction<string>) => {
             state.filter((product) => product.row !==  action.payload);

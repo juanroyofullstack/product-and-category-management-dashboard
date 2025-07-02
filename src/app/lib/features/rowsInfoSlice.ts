@@ -37,7 +37,7 @@ export const rowsInfoSlice = createSlice({
         addRow: (state, action: PayloadAction<rowsInfo>) => {
             state.push(action.payload);
         },
-        addRowProductCount: (state, action: PayloadAction<string>) => {
+        increaseRowProductCount: (state, action: PayloadAction<string>) => {
             const player = state.find(
                 (row) => row.id === action.payload,
             );
@@ -46,9 +46,14 @@ export const rowsInfoSlice = createSlice({
             }
         },
         removeRow: (state, action: PayloadAction<string>) => {
-            const index = state.findIndex((row) => row.id === action.payload);
-            if (index !== -1) {
-                return state.splice(index, 1);
+            return state.filter((row) => row.id !== action.payload);
+        },
+        decreaseRowProductCount: (state, action: PayloadAction<string | undefined>) => {
+            const row = state.find(
+                (row) => row.id === action.payload,
+            );
+            if(row) {
+                row.productsCount -= 1;
             }
         },
         updateRow: (state, action: PayloadAction<rowsInfo>) => {
@@ -76,8 +81,9 @@ export const rowsInfoSlice = createSlice({
 
 export const {
     addRow,
-    addRowProductCount,
+    increaseRowProductCount,
     removeRow,
+    decreaseRowProductCount,
     updateRow,
     setLeft,
     setCenter,

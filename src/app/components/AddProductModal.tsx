@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Button } from '@mui/material';
 import { useAppDispatch } from '../lib/hooks';
-import { addRowProductCount } from '../lib/features/rowsInfoSlice';
+import { increaseRowProductCount } from '../lib/features/rowsInfoSlice';
 
 import { addProduct } from '../lib/features/productsInfoSlice';
 
@@ -30,7 +30,7 @@ export default function AddProductModal({ rowId }: { rowId: string }) {
     const handleClose = () => setOpen(false);
     const dispatch = useAppDispatch();
 
-    const handleClean = (e?: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
         e?.preventDefault();
         dispatch(addProduct({
             id: Date.now().toString(),
@@ -40,7 +40,7 @@ export default function AddProductModal({ rowId }: { rowId: string }) {
             price: parseFloat(price),
             row: rowId,
         }));
-        dispatch(addRowProductCount(rowId));
+        dispatch(increaseRowProductCount(rowId));
         setTitle('');
         setPrice('');
         setDescription('');
@@ -51,7 +51,6 @@ export default function AddProductModal({ rowId }: { rowId: string }) {
     return (
         <div>
             <Button onClick={handleOpen}>Add product</Button>
-
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -61,7 +60,7 @@ export default function AddProductModal({ rowId }: { rowId: string }) {
                 <Box sx={style} 
                     component="form"
                     onSubmit={e => {
-                        handleClean(e);
+                        handleSubmit(e);
                     }}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                             Add Product
