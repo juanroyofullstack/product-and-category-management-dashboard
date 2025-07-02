@@ -6,11 +6,17 @@ export enum RowState {
     RIGHT = 'end',
 }
 
+export enum RowStateSelectText {
+    start = 'Left',
+    center = 'Center',
+    end = 'End',
+}
 const rowMockData: rowsInfo[] = [
     {
         id: '1',
         title: 'Row 1',
         state: RowState.LEFT,
+        productsCount: 1,
     },  
 ];
 
@@ -18,6 +24,7 @@ export interface rowsInfo {
     id: string;
     title: string;
     state: RowState;
+    productsCount: number;
 }
 
 const initialState: rowsInfo[] = rowMockData;
@@ -30,29 +37,37 @@ export const rowsInfoSlice = createSlice({
         addRow: (state, action: PayloadAction<rowsInfo>) => {
             state.push(action.payload);
         },
+        addRowProductCount: (state, action: PayloadAction<string>) => {
+            const player = state.find(
+                (row) => row.id === action.payload,
+            );
+            if(player) {
+                player.productsCount += 1;
+            }
+        },
         removeRow: (state, action: PayloadAction<string>) => {
             const index = state.findIndex((row) => row.id === action.payload);
             if (index !== -1) {
-                state.splice(index, 1);
+                return state.splice(index, 1);
             }
         },
         updateRow: (state, action: PayloadAction<rowsInfo>) => {
-            state.map((row) =>
+            return state.map((row) =>
                 row.id === action.payload.id ? action.payload : row,
             );
         },
         setLeft: (state, action: PayloadAction<string>) => {
-            state.map((row) =>
+            return state.map((row) =>
                 row.id === action.payload ? { ...row, state: RowState.LEFT } : row,
             );
         },
         setCenter: (state, action: PayloadAction<string>) => {
-            state.map((row) =>
+            return state.map((row) =>
                 row.id === action.payload ? { ...row, state: RowState.CENTER } : row,
             );
         },
         setRight: (state, action: PayloadAction<string>) => {
-            state.map((row) =>
+            return state.map((row) =>
                 row.id === action.payload ? { ...row, state: RowState.RIGHT } : row,
             );
         },
@@ -61,6 +76,7 @@ export const rowsInfoSlice = createSlice({
 
 export const {
     addRow,
+    addRowProductCount,
     removeRow,
     updateRow,
     setLeft,

@@ -16,7 +16,7 @@ const RowContainer = () => {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full gap-4">
+        <div className="flex flex-col items-center justify-center w-full h-full pt-20 px-6 gap-4">
             {rows.length > 0 ? (
                 rows.map((row) => (
                     <Row key={row.id} row={row} />
@@ -45,7 +45,8 @@ const RowContainer = () => {
                         disabled={!rowName}
                         onClick={() => {
                             setShowAddRow(false);
-                            dispatch(addRow({ id: Date.now().toString(), title: rowName, state: RowState.LEFT }));
+                            dispatch(addRow({ id: Date.now().toString(), title: rowName, state: RowState.LEFT, productsCount: 0 }));
+                            setRowName('');
                         }}
                     >
                         Save Row

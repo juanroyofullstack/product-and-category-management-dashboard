@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Button } from '@mui/material';
 import { useAppDispatch } from '../lib/hooks';
+import { addRowProductCount } from '../lib/features/rowsInfoSlice';
+
 import { addProduct } from '../lib/features/productsInfoSlice';
 
 const style = {
@@ -18,7 +20,7 @@ const style = {
     p: 4,
 };
 
-export default function AddProductModal({ rowId }: {rowId: string}) {
+export default function AddProductModal({ rowId }: { rowId: string }) {
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
@@ -28,6 +30,24 @@ export default function AddProductModal({ rowId }: {rowId: string}) {
     const handleClose = () => setOpen(false);
     const dispatch = useAppDispatch();
 
+    const handleClean = (e?: React.FormEvent<HTMLFormElement>) => {
+        e?.preventDefault();
+        dispatch(addProduct({
+            id: Date.now().toString(),
+            title,
+            description,
+            image,
+            price: parseFloat(price),
+            row: rowId,
+        }));
+        dispatch(addRowProductCount(rowId));
+        setTitle('');
+        setPrice('');
+        setDescription('');
+        setImage('');
+        handleClose();
+    };
+    
     return (
         <div>
             <Button onClick={handleOpen}>Add product</Button>
@@ -41,16 +61,7 @@ export default function AddProductModal({ rowId }: {rowId: string}) {
                 <Box sx={style} 
                     component="form"
                     onSubmit={e => {
-                        e.preventDefault();
-                        dispatch(addProduct({
-                            id: Date.now().toString(),
-                            title,
-                            description,
-                            image,
-                            price: parseFloat(price),
-                            row: rowId,
-                        }));
-                        handleClose();
+                        handleClean(e);
                     }}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                             Add Product

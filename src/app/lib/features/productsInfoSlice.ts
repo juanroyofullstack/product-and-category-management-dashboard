@@ -30,13 +30,13 @@ export const productsInfoSlice = createSlice({
             state.push(action.payload);
         },
         removeProduct: (state, action: PayloadAction<productsInfo>) => {
-            return state.filter((product) => product.id !== action.payload.id);
+            state.filter((product) => product.id !== action.payload.id);
         },
         removeAllProductsAsociatedToRow: (state, action: PayloadAction<string>) => {
-            return state.filter((product) => product.row !==  action.payload);
+            state.filter((product) => product.row !==  action.payload);
         },
         updateProduct: (state, action: PayloadAction<productsInfo>) => {
-            return state.map((product) =>
+            state.map((product) =>
                 product.id === action.payload.id ? action.payload : product,
             );
         },
