@@ -7,12 +7,6 @@ import Products from '../components/Products';
 import AddProductModal from './AddProductModal';
 import DeletionModal from './Modal';
 
-const justifyMap: Record<string, string> = {
-    start: 'justify-start',
-    center: 'justify-center',
-    end: 'justify-end',
-};
-
 
 const Row = ({ row }:{ row: rowsInfo }) => {
     const [rowState, setRowState ] = useState<string>(RowStateSelectText[row.state]);
@@ -62,9 +56,7 @@ const Row = ({ row }:{ row: rowsInfo }) => {
                             {rowProductsCount < 3 && <AddProductModal rowId={row.id} />}
                         </div>
                     </div>
-                    <div className={`flex flex-wrap items-center ${justifyMap[row.state]} w-full h-full gap-4`}>
-                        <Products rowId={row.id}/>
-                    </div>   
+                    <Products row={row}/>
                 </div>  
             ) : (
                 <p>No rows available</p>

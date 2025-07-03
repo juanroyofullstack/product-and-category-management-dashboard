@@ -1,19 +1,25 @@
 import { useAppSelector } from '../lib/hooks';
 import { selectProductsByRow } from '../lib/selectors/selectors';
-import DeletionModal from './Modal';
+import { rowsInfo } from '../lib/features/rowsInfoSlice';
 
-const Products = ({ rowId }: { rowId: string }) => {
-    const products = useAppSelector(state => selectProductsByRow(state, rowId));
+import ProductCard from './ProductCard';
+
+const justifyMap: Record<string, string> = {
+    start: 'justify-start',
+    center: 'justify-center',
+    end: 'justify-end',
+};
+
+const Products = ({ row }: { row: rowsInfo }) => {
+    const products = useAppSelector(state => selectProductsByRow(state, row.id));
     
     return (
         <>
-            {products && products.map((product) => (
-                <div key={product.id} className="p-4 border rounded">
-                    <DeletionModal product={product} />
-                    {product.title && <h3 className="text-md font-semibold">{product.title}</h3>}
-                    {product.description && <p className="text-sm text-gray-600">{product.description}</p>}
-                </div>
-            ))}
+            <div className={`flex flex-wrap items-center ${justifyMap[row.state]} w-full h-full gap-4`}>
+                {products && products.map((product) => (
+                    <ProductCard key={product.id} product={product}/>
+                ))}
+            </div>   
         </>
     );
 };
