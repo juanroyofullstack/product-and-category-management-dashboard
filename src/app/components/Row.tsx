@@ -3,7 +3,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useAppDispatch } from '../lib/hooks';
 import { rowsInfo, setLeft, setCenter, setRight, RowStateSelectText } from '../lib/features/rowsInfoSlice';
-import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
 import Products from '../components/Products';
 import AddProductModal from './AddProductModal';
 import DeletionModal from './Modal';
@@ -12,19 +11,8 @@ import DeletionModal from './Modal';
 const Row = ({ row }:{ row: rowsInfo }) => {
     const [rowState, setRowState ] = useState<string>(RowStateSelectText[row.state]);
     const dispatch = useAppDispatch();
-    const { handleUpdateList, handleDragging } = useDragAndDrop();
 
     const rowProductsCount = row.productsCount;
-
-    const handleDrop = (e: React.DragEvent<HTMLDivElement>): void => {
-        e.preventDefault();
-        const product = JSON.parse(e.dataTransfer.getData('product'));
-        handleUpdateList(product, row.id);
-        handleDragging(false);
-    };
-
-    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) =>
-        e.preventDefault();
 
     const handleChange = (e: SelectChangeEvent) => {
         setRowState(e.target.value);
@@ -47,9 +35,7 @@ const Row = ({ row }:{ row: rowsInfo }) => {
     return (
         <div className="flex flex-col items-center justify-center w-full h-full gap-4">
             {row ? (
-                <div key={row.id} className='flex flex-col justify-around w-full p-4 border rounded-lg' 
-                    onDrop={handleDrop}
-                    onDragOver={handleDragOver}>
+                <div key={row.id} className='flex flex-col justify-around w-full p-4 border rounded-lg'>
                     <div key={row.id} className='flex justify-between w-full p-4'>
                         <div className="flex items-center gap-4">
                             <h2 className="text-lg font-bold">{row.title}</h2>

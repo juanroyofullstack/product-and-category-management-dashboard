@@ -61,6 +61,9 @@ export const rowsInfoSlice = createSlice({
                 row.id === action.payload.id ? action.payload : row,
             );
         },
+        reorderRows: (state, action: PayloadAction<rowsInfo[]>) => {
+            return state = action.payload;
+        },
         setLeft: (state, action: PayloadAction<string>) => {
             return state.map((row) =>
                 row.id === action.payload ? { ...row, state: RowState.LEFT } : row,
@@ -85,6 +88,7 @@ export const {
     removeRow,
     decreaseRowProductCount,
     updateRow,
+    reorderRows,
     setLeft,
     setCenter,
     setRight,
