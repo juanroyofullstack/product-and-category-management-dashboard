@@ -36,9 +36,10 @@ export const productsInfoSlice = createSlice({
             state.filter((product) => product.row !==  action.payload);
         },
         updateProduct: (state, action: PayloadAction<productsInfo>) => {
-            state.map((product) =>
-                product.id === action.payload.id ? action.payload : product,
-            );
+            const index = state.findIndex(product => product.id === action.payload.id);
+            if (index !== -1) {
+                state[index] = action.payload;
+            }
         },
     },
 });
