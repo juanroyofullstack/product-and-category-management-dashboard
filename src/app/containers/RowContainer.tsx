@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@mui/material';
+import Box from '@mui/material/Box';
 import { addRow, RowState } from '../lib/features/rowsInfoSlice';
 import Row from '../components/Row';
 import { selectRows } from '../lib/selectors/selectors';
@@ -12,11 +13,11 @@ const RowContainer = () => {
     const [showAddRow, setShowAddRow] = useState(false);
     const [rowName, setRowName] = useState('');
     const rows = useAppSelector(selectRows);
-    
+
     const dispatch = useAppDispatch();
 
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full pt-20 px-6 gap-4">
+        <div className="RowContainer flex flex-col items-center justify-center w-full h-full pt-20 px-6 gap-4" >
             {rows.length > 0 ? (
                 rows.map((row) => (
                     <Row key={row.id} row={row} />
@@ -32,25 +33,30 @@ const RowContainer = () => {
 
             {showAddRow && (
                 <div className="flex flex-col items-center justify-center w-full h-full gap-4">
-                    <input
-                        type="text"
-                        placeholder="Enter row title"
-                        className="p-2 border rounded"
-                        onChange={(e) => setRowName(e.target.value)}
-                    />
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        type='button'
-                        disabled={!rowName}
-                        onClick={() => {
+                    <Box
+                        component="form"
+                        onSubmit={e => {
+                            e.preventDefault();
                             setShowAddRow(false);
                             dispatch(addRow({ id: Date.now().toString(), title: rowName, state: RowState.LEFT, productsCount: 0 }));
                             setRowName('');
-                        }}
-                    >
+                        }
+                        }>
+                        <input
+                            type="text"
+                            placeholder="Enter row title"
+                            className="p-2 border rounded"
+                            onChange={(e) => setRowName(e.target.value)}
+                        />
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            type='submit'
+                            disabled={!rowName}
+                        >
                         Save Row
-                    </Button>
+                        </Button>
+                    </Box>
                 </div>
             )}
         </div>
