@@ -15,7 +15,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '1px solid #000',
     boxShadow: 24,
     p: 4,
 };
@@ -49,7 +49,7 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
     };
     
     return (
-        <div>
+        <div className="AddProductModal">
             <Button onClick={handleOpen}>Add product</Button>
             <Modal
                 open={open}
@@ -62,53 +62,57 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
                     onSubmit={e => {
                         handleSubmit(e);
                     }}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <Typography id="modal-modal-title" variant="h6" component="h2" className="text-black pb-2">
                             Add Product
                     </Typography>
-                    <input
-                        type="text"
-                        placeholder="Title"
-                        required
-                        style={{ padding: '8px', fontSize: '16px' }}
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
-                    />
-                    <input
-                        type="number"
-                        placeholder="Price"
-                        required
-                        style={{ padding: '8px', fontSize: '16px' }}
-                        value={price}
-                        onChange={e => setPrice(e.target.value)}
-                    />
-                    <textarea
-                        placeholder="Description"
-                        required
-                        style={{ padding: '8px', fontSize: '16px' }}
-                        value={description}
-                        onChange={e => setDescription(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Image URL"
-                        required
-                        style={{ padding: '8px', fontSize: '16px' }}
-                        value={image}
-                        onChange={e => setImage(e.target.value)}
-                    />
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        type='submit'
-                    >
-                        Add
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleClose}>
-                        Cancel
-                    </Button>
+                    <div className="gap-4 flex flex-col">
+                        <input
+                            type="text"
+                            placeholder="Title"
+                            required
+                            className="p-2 text-m text-black border-gray-700"
+                            value={title}
+                            onChange={e => setTitle(e.target.value)}
+                        />
+                        <input
+                            type="number"
+                            placeholder="Price"
+                            required
+                            className="p-2 text-m text-black border-gray-700"
+                            value={price}
+                            onChange={e => setPrice(e.target.value)}
+                        />
+                        <textarea
+                            placeholder="Description"
+                            required
+                            className="p-2 text-m text-black border-gray-700"
+                            value={description}
+                            onChange={e => setDescription(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Image URL"
+                            required
+                            className="p-2 text-m text-black border-gray-700"
+                            value={image}
+                            onChange={e => setImage(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex items-center justify-center gap-4 mt-4">
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            type='submit'
+                        >
+                            Add
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleClose}>
+                            Cancel
+                        </Button>
+                    </div>
                 </Box>
             </Modal>
         </div>

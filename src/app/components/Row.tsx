@@ -4,16 +4,13 @@ import { rowsInfo, setLeft, setCenter, setRight, RowStateSelectText } from '../l
 import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
 import { useAppDispatch } from '../lib/hooks';
 import Products from '../components/Products';
-import AddProductModal from './AddProductModal';
 import DeletionModal from './Modal';
 
 
 const Row = ({ row }:{ row: rowsInfo }) => {
     const [rowState, setRowState ] = useState<string>(RowStateSelectText[row.state]);
-    const { handleUpdateList, handleReorderRows, handleDragging } = useDragAndDrop();
+    const { handleUpdateList, handleReorderRows, handleDragging, handleDragEnd } = useDragAndDrop();
     const dispatch = useAppDispatch();
-
-    const rowProductsCount = row.productsCount;
 
     const handleChange = (e: SelectChangeEvent) => {
         setRowState(e.target.value);
@@ -56,21 +53,25 @@ const Row = ({ row }:{ row: rowsInfo }) => {
         handleDragging(true);
     };
 
-    const handleDragEnd = () => handleDragging(false);
-
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full gap-4">
+        <div className="Row flex flex-col items-center justify-center w-full h-full gap-4">
             {row ? (
                 <div key={row.id} className='flex flex-col justify-around w-full p-4 border rounded-lg'
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                 >
-                    <div onDragStart={handleDragStartRow}
-                        onDragEnd={handleDragEnd}
-                        draggable>=</div>
+                    <div className="flex flex-row justify-between items-center gap-4">
+                        <div className="w-min"
+                            onDragStart={handleDragStartRow}
+                            onDragEnd={handleDragEnd}
+                            draggable>
+                            =
+                        </div>
+                        <DeletionModal rowId={row.id} />
+                    </div>
                     <div key={row.id} className='flex justify-between w-full p-4'>
-                        <div className="flex items-center gap-4">
-                            <h2 className="text-lg font-bold">{row.title}</h2>
+                        <div className="flex flex-row justify-between items-center w-full gap-4">
+                            <h2 className="text-lg font-bold text-black">{row.title}</h2>
                             <Select
                                 labelId="demo-simple-select-label"
                                 className="justify-self-start"
@@ -83,10 +84,6 @@ const Row = ({ row }:{ row: rowsInfo }) => {
                                 <MenuItem value={RowStateSelectText.center}>Center</MenuItem>
                                 <MenuItem value={RowStateSelectText.end}>Right</MenuItem>
                             </Select>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <DeletionModal rowId={row.id} />
-                            {rowProductsCount < 3 && <AddProductModal rowId={row.id} />}
                         </div>
                     </div>
                     <Products row={row}/>

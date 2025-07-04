@@ -17,11 +17,13 @@ export const useDragAndDrop = () => {
         dispatch(reorderRows({ fromRowId, toRowId }));
     };
     const handleDragging = (dragging: boolean) => setIsDragging(dragging);
+    const handleDragEnd = () => handleDragging(false);
 
     return {
         isDragging,
         handleUpdateList,
         handleReorderRows,
         handleDragging,
+        handleDragEnd,
     };
 };

@@ -67,36 +67,38 @@ export default function DeletionModal({ rowId, product }: { rowId?: number, prod
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <Typography id="modal-modal-title" variant="h6" component="h2" className="text-black pb-2">
                         {rowId && `You\'re about to delete a row${productsCount && productsCount > 0 ? ', all cards within it will be deleted as well.' : ''}`}
                         {product && 'You\'re about to delete a product, this action cannot be undone.'}
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }} className="text-black pb-2">
                         Are you sure you want to proceed?
                     </Typography>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => {
-                            if(rowId && !product) {
-                                dispatch(removeRow(rowId)); 
-                                dispatch(removeAllProductsAsociatedToRow(rowId));
+                    <div className="flex justify-center gap-4 text-black pb-2 pt-2">
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => {
+                                if(rowId && !product) {
+                                    dispatch(removeRow(rowId)); 
+                                    dispatch(removeAllProductsAsociatedToRow(rowId));
+                                }
+                                if(product && !rowId) {
+                                    dispatch(removeProduct(product.id));
+                                    dispatch(decreaseRowProductCount(product.row));
+                                }
+                            } 
                             }
-                            if(product && !rowId) {
-                                dispatch(removeProduct(product.id));
-                                dispatch(decreaseRowProductCount(product.row));
-                            }
-                        } 
-                        }
-                    >
-                        DELETE
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleClose}>
-                        Cancel
-                    </Button>
+                        >
+                            Delete
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleClose}>
+                            Cancel
+                        </Button>
+                    </div>
                 </Box>
             </Modal>
         </div>

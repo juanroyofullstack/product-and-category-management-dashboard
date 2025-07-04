@@ -43,20 +43,22 @@ const RowContainer = () => {
                             setRowName('');
                         }
                         }>
-                        <input
-                            type="text"
-                            placeholder="Enter row title"
-                            className="p-2 border rounded"
-                            onChange={(e) => setRowName(e.target.value)}
-                        />
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            type='submit'
-                            disabled={!rowName}
-                        >
-                        Save Row
-                        </Button>
+                        <div className="flex flex-col gap-2">
+                            <input
+                                type="text"
+                                placeholder="Enter row title"
+                                className="p-2 border rounded"
+                                onChange={(e) => setRowName(e.target.value)}
+                            />
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                type='submit'
+                                disabled={!rowName}
+                            >
+                                Save Row
+                            </Button>
+                        </div>
                     </Box>
                 </div>
             )}
