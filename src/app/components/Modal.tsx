@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
+import { Box, Button, MenuItem, Modal, Select, SelectChangeEvent, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { Button } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
-import { removeRow, decreaseRowProductCount } from '../lib/features/rowsInfoSlice';
-import type { productsInfo } from '../lib/features/productsInfoSlice';
 import { removeAllProductsAsociatedToRow, removeProduct } from '../lib/features/productsInfoSlice';
+import type { productsInfo } from '../lib/features/productsInfoSlice';
+import { removeRow, decreaseRowProductCount } from '../lib/features/rowsInfoSlice';
 
 const style = {
     position: 'absolute',
@@ -26,7 +21,7 @@ const style = {
 
 export default function DeletionModal({ rowId, product }: { rowId?: number, product?: productsInfo }) {
     const [open, setOpen] = useState(false);
-    const [showSelect, setShowSelect] = useState<boolean>(false);
+    const [showSelect, setShowSelect] = useState(false);
     const productsCount = useAppSelector(state => state.rows.find(row => row.id === rowId)?.productsCount);
 
     const handleOpen = () => setOpen(true);

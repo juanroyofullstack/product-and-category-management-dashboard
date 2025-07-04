@@ -61,8 +61,13 @@ export const rowsInfoSlice = createSlice({
                 row.id === action.payload.id ? action.payload : row,
             );
         },
-        reorderRows: (state, action: PayloadAction<rowsInfo[]>) => {
-            return state = action.payload;
+        reorderRows: (state, action: PayloadAction<{ fromRowId: number, toRowId: number }>) => {
+            const { fromRowId, toRowId } = action.payload;
+            const fromIndex = state.findIndex(row => row.id === fromRowId);
+            const toIndex = state.findIndex(row => row.id === toRowId);
+            if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return;
+            const [movedRow] = state.splice(fromIndex, 1);
+            state.splice(toIndex, 0, movedRow);
         },
         setLeft: (state, action: PayloadAction<number>) => {
             return state.map((row) =>

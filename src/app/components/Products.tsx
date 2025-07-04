@@ -1,6 +1,6 @@
-import { useAppSelector } from '../lib/hooks';
-import { selectProductsByRow } from '../lib/selectors/selectors';
 import { rowsInfo } from '../lib/features/rowsInfoSlice';
+import { selectProductsByRow } from '../lib/selectors/selectors';
+import { useAppSelector } from '../lib/hooks';
 
 import ProductCard from './ProductCard';
 
