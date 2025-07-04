@@ -20,7 +20,7 @@ const style = {
     p: 4,
 };
 
-export default function AddProductModal({ rowId }: { rowId: string }) {
+export default function AddProductModal({ rowId }: { rowId: number }) {
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
@@ -33,7 +33,7 @@ export default function AddProductModal({ rowId }: { rowId: string }) {
     const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
         e?.preventDefault();
         dispatch(addProduct({
-            id: Date.now().toString(),
+            id: Date.now(),
             title,
             description,
             image,

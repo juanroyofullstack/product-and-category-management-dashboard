@@ -13,7 +13,7 @@ export enum RowStateSelectText {
 }
 const rowMockData: rowsInfo[] = [
     {
-        id: '1',
+        id: 1,
         title: 'Row 1',
         state: RowState.LEFT,
         productsCount: 1,
@@ -21,7 +21,7 @@ const rowMockData: rowsInfo[] = [
 ];
 
 export interface rowsInfo {
-    id: string;
+    id: number;
     title: string;
     state: RowState;
     productsCount: number;
@@ -37,7 +37,7 @@ export const rowsInfoSlice = createSlice({
         addRow: (state, action: PayloadAction<rowsInfo>) => {
             state.push(action.payload);
         },
-        increaseRowProductCount: (state, action: PayloadAction<string>) => {
+        increaseRowProductCount: (state, action: PayloadAction<number>) => {
             const player = state.find(
                 (row) => row.id === action.payload,
             );
@@ -45,10 +45,10 @@ export const rowsInfoSlice = createSlice({
                 player.productsCount += 1;
             }
         },
-        removeRow: (state, action: PayloadAction<string>) => {
+        removeRow: (state, action: PayloadAction<number>) => {
             return state.filter((row) => row.id !== action.payload);
         },
-        decreaseRowProductCount: (state, action: PayloadAction<string | undefined>) => {
+        decreaseRowProductCount: (state, action: PayloadAction<number | undefined>) => {
             const row = state.find(
                 (row) => row.id === action.payload,
             );
@@ -64,17 +64,17 @@ export const rowsInfoSlice = createSlice({
         reorderRows: (state, action: PayloadAction<rowsInfo[]>) => {
             return state = action.payload;
         },
-        setLeft: (state, action: PayloadAction<string>) => {
+        setLeft: (state, action: PayloadAction<number>) => {
             return state.map((row) =>
                 row.id === action.payload ? { ...row, state: RowState.LEFT } : row,
             );
         },
-        setCenter: (state, action: PayloadAction<string>) => {
+        setCenter: (state, action: PayloadAction<number>) => {
             return state.map((row) =>
                 row.id === action.payload ? { ...row, state: RowState.CENTER } : row,
             );
         },
-        setRight: (state, action: PayloadAction<string>) => {
+        setRight: (state, action: PayloadAction<number>) => {
             return state.map((row) =>
                 row.id === action.payload ? { ...row, state: RowState.RIGHT } : row,
             );

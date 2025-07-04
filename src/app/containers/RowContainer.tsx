@@ -19,6 +19,8 @@ import { CSS } from '@dnd-kit/utilities';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import { addRow, RowState } from '../lib/features/rowsInfoSlice';
+
+import { updateProduct } from '../lib/features/productsInfoSlice';
 import Row from '../components/Row';
 import { selectRows } from '../lib/selectors/selectors';
 import { useAppSelector, useAppDispatch } from '../lib/hooks';
@@ -26,8 +28,17 @@ import { rowsInfo, reorderRows } from '../lib/features/rowsInfoSlice';
 
 
 const SortableRow = ({ row, ...props }: { row: rowsInfo }) => {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: row.id });
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: row.id,  data: { type: 'row' } });
+    const dispatch = useAppDispatch();
 
+    const handleDragEnd = (event: DragEndEvent) => {
+        const { active, over } = event;
+        if (!over) return;
+        // over.id debe ser el id de la fila destino
+        if (active.data.current?.type === 'product' && over.data.current?.type === 'row') {
+            dispatch(updateProduct({ productId: Number(active.id), rowId: Number(over.id) }));
+        }
+    };
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
@@ -56,6 +67,10 @@ const RowContainer = () => {
 
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
+        // if (active.data.current?.type === 'product') {
+        //     console.log('Drag Ended', active, over, event);
+        //     dispatch(updateProduct({ productId: Number(active.id), rowId: Number(over?.id) }));
+        // }
         if (active.id !== over?.id) {
             const oldIndex = rows.findIndex(row => row.id === active.id);
             const newIndex = rows.findIndex(row => row.id === over?.id);
@@ -94,7 +109,7 @@ const RowContainer = () => {
                                 onSubmit={e => {
                                     e.preventDefault();
                                     setShowAddRow(false);
-                                    dispatch(addRow({ id: Date.now().toString(), title: rowName, state: RowState.LEFT, productsCount: 0 }));
+                                    dispatch(addRow({ id: Date.now(), title: rowName, state: RowState.LEFT, productsCount: 0 }));
                                     setRowName('');
                                 }
                                 }>

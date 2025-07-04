@@ -4,7 +4,7 @@ import { RootState } from '../store';
 export const selectProductsByRow = createSelector(
     [
         (state: RootState) => state.products,
-        (_: RootState, rowId: string) => rowId,
+        (_: RootState, rowId: number) => rowId,
     ],
     (products, rowId) => products.filter(product => product.row === rowId),
 );

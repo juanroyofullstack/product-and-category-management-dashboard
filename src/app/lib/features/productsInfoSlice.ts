@@ -2,22 +2,22 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const productsMockData = [
     {
-        id: '1',
+        id: 1,
         title: 'Product 1', 
         description: 'Description for Product 1',
         image: 'https://via.placeholder.com/150',
         price: 19.99,
-        row: '1',
+        row: 1,
     },
 ];
 
 export interface productsInfo {
-    id: string;
+    id: number;
     title: string;
     description: string;
     image: string;
     price: number;
-    row: string;
+    row: number;
 }
 
 const initialState: productsInfo[] = productsMockData;
@@ -29,16 +29,16 @@ export const productsInfoSlice = createSlice({
         addProduct: (state, action: PayloadAction<productsInfo>) => {
             state.push(action.payload);
         },
-        removeProduct: (state, action: PayloadAction<string>) => {
+        removeProduct: (state, action: PayloadAction<number>) => {
             return state.filter((product) => product.id !== action.payload);
         },
-        removeAllProductsAsociatedToRow: (state, action: PayloadAction<string>) => {
+        removeAllProductsAsociatedToRow: (state, action: PayloadAction<number>) => {
             state.filter((product) => product.row !==  action.payload);
         },
-        updateProduct: (state, action: PayloadAction<productsInfo>) => {
-            const index = state.findIndex(product => product.id === action.payload.id);
+        updateProduct: (state, action: PayloadAction<{ productId: number; rowId: number; }>) => {
+            const index = state.findIndex(product => product.id === action.payload.productId);
             if (index !== -1) {
-                state[index] = action.payload;
+                state[index].row = action.payload.rowId;
             }
         },
     },

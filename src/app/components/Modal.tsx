@@ -24,7 +24,7 @@ const style = {
     p: 4,
 };
 
-export default function DeletionModal({ rowId, product }: { rowId?: string, product?: productsInfo }) {
+export default function DeletionModal({ rowId, product }: { rowId?: number, product?: productsInfo }) {
     const [open, setOpen] = useState(false);
     const [showSelect, setShowSelect] = useState<boolean>(false);
     const productsCount = useAppSelector(state => state.rows.find(row => row.id === rowId)?.productsCount);
