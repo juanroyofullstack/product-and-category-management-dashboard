@@ -29,16 +29,7 @@ import { rowsInfo, reorderRows } from '../lib/features/rowsInfoSlice';
 
 const SortableRow = ({ row, ...props }: { row: rowsInfo }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: row.id,  data: { type: 'row' } });
-    const dispatch = useAppDispatch();
 
-    const handleDragEnd = (event: DragEndEvent) => {
-        const { active, over } = event;
-        if (!over) return;
-        // over.id debe ser el id de la fila destino
-        if (active.data.current?.type === 'product' && over.data.current?.type === 'row') {
-            dispatch(updateProduct({ productId: Number(active.id), rowId: Number(over.id) }));
-        }
-    };
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
@@ -60,21 +51,17 @@ const RowContainer = () => {
     const rows = useAppSelector(selectRows);
 
     const dispatch = useAppDispatch();
-    // Sensores para drag and drop
+
     const sensors = useSensors(
         useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
     );
 
     const handleDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
-        // if (active.data.current?.type === 'product') {
-        //     console.log('Drag Ended', active, over, event);
-        //     dispatch(updateProduct({ productId: Number(active.id), rowId: Number(over?.id) }));
-        // }
+
         if (active.id !== over?.id) {
             const oldIndex = rows.findIndex(row => row.id === active.id);
             const newIndex = rows.findIndex(row => row.id === over?.id);
-            // Aquí deberías despachar una acción para reordenar las filas en tu store
             dispatch(reorderRows(arrayMove(rows, oldIndex, newIndex)));
         }
     };

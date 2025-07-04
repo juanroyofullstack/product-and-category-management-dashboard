@@ -7,8 +7,8 @@ export const useDragAndDrop = () => {
     const [isDragging, setIsDragging] = useState(false);
     const dispatch = useDispatch();
 
-    const handleUpdateList = (product: productsInfo, rowId: string): void => {
-        dispatch(updateProduct({...product, row: rowId}));
+    const handleUpdateList = (product: productsInfo, rowId: number): void => {
+        dispatch(updateProduct({ productId: product.id, rowId: rowId}));
     };
 
     const handleDragging = (dragging: boolean) => setIsDragging(dragging);
