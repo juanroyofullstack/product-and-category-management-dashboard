@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import Link from 'next/link';
 
-const Header: React.FC = () => {
+const Header = () => {
     return (
         <AppBar position="fixed" className="bg-blue-500 flex">
             <Toolbar className="flex justify-between">

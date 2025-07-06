@@ -1,6 +1,13 @@
 import React from 'react';
 import { Box, Button, Modal, Typography } from '@mui/material';
-import type { DeletionModalProps } from '../types/modal.types';
+
+export interface DeletionModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onConfirm: () => void;
+    title: string;
+    description: string;
+}
 
 export const DeletionModal: React.FC<DeletionModalProps> = ({
     isOpen,

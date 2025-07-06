@@ -1,6 +1,6 @@
 import { productsInfo } from '../lib/features/productsInfoSlice';
 import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
-import DeletionModal from './Modal';
+import DeletionModal from './DeletionModal';
 
 const ProductCard = ({ product }: { product: productsInfo })=> {
       	const { handleDragging, handleDragEnd } = useDragAndDrop();

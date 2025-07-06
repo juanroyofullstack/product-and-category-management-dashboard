@@ -1,15 +1,16 @@
 import { SelectChangeEvent } from '@mui/material';
 import { rowsInfo, setLeft, setCenter, setRight, RowStateSelectText } from '../lib/features/rowsInfoSlice';
 import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
+import { selectProductsByRow } from '../lib/selectors/selectors';
+import { useAppDispatch, useAppSelector } from '../lib/hooks';
 import Products from '../components/Products';
 import RowHeader from './ui/RowHeader';
 import XIconDeletionRow from './ui/XIconDeletionRow';
-import { useAppDispatch } from '../lib/hooks';
+import ProductCard from './ProductCard';
 
-
-const Row = ({ row }:{ row: rowsInfo }) => {
-    // const [rowState, setRowState ] = useState<string>(RowStateSelectText[row.state]);
+const Row = ({ row }: { row: rowsInfo }) => {
     const { handleUpdateList, handleReorderRows, handleDragging, handleDragEnd } = useDragAndDrop();
+    const products = useAppSelector(state => selectProductsByRow(state, row.id));
     const dispatch = useAppDispatch();
 
     const handleChange = (e: SelectChangeEvent) => {
@@ -60,7 +61,11 @@ const Row = ({ row }:{ row: rowsInfo }) => {
             >
                 <XIconDeletionRow row={row} handleDragStartRow={handleDragStartRow} handleDragEnd={handleDragEnd} />
                 <RowHeader row={row} handleChange={handleChange} />
-                <Products row={row}/>
+                <Products  row={row}>
+                    {products && products.map((product) => (
+                        <ProductCard key={product.id} product={product}/>
+                    ))}
+                </Products>
             </div>  
         </div>
     );

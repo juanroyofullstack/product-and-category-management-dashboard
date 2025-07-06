@@ -5,7 +5,6 @@ import type { productsInfo } from '../lib/features/productsInfoSlice';
 import { removeRow, decreaseRowProductCount } from '../lib/features/rowsInfoSlice';
 import { DeletionModal } from './ui/DeletionModal';
 import { DeletionTrigger } from './ui/DeletionTrigger';
-// import './Modal.css';
 
 export interface ModalProps {
     rowId?: number;
