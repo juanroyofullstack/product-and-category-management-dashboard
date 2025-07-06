@@ -8,7 +8,7 @@ const XIconDeletionRow = ({
     handleDragEnd,
 }: {
     row: rowsInfo;
-    handleDragStartRow: () => void;
+    handleDragStartRow: (e: React.DragEvent<HTMLDivElement>) => void;
     handleDragEnd: () => void;
 }) => { 
     return <div className="flex flex-row justify-between items-center gap-4">
