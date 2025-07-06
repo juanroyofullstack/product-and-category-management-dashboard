@@ -33,7 +33,7 @@ export const productsInfoSlice = createSlice({
             return state.filter((product) => product.id !== action.payload);
         },
         removeAllProductsAsociatedToRow: (state, action: PayloadAction<number>) => {
-            state.filter((product) => product.row !==  action.payload);
+            return state.filter((product) => product.row !==  action.payload);
         },
         updateProduct: (state, action: PayloadAction<{ productId: number; rowId: number; }>) => {
             const index = state.findIndex(product => product.id === action.payload.productId);

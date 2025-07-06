@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material';
 import { rowsInfo, setLeft, setCenter, setRight, RowStateSelectText } from '../lib/features/rowsInfoSlice';
 import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
-import { useAppDispatch } from '../lib/hooks';
 import Products from '../components/Products';
-import DeletionModal from './Modal';
+import RowHeader from './ui/RowHeader';
+import XIconDeletionRow from './ui/XIconDeletionRow';
+import { useAppDispatch } from '../lib/hooks';
 
 
 const Row = ({ row }:{ row: rowsInfo }) => {
-    const [rowState, setRowState ] = useState<string>(RowStateSelectText[row.state]);
+    // const [rowState, setRowState ] = useState<string>(RowStateSelectText[row.state]);
     const { handleUpdateList, handleReorderRows, handleDragging, handleDragEnd } = useDragAndDrop();
     const dispatch = useAppDispatch();
 
     const handleChange = (e: SelectChangeEvent) => {
-        setRowState(e.target.value);
         const value = e.target.value;
         switch (value) {
             case RowStateSelectText.start:
@@ -55,42 +54,14 @@ const Row = ({ row }:{ row: rowsInfo }) => {
 
     return (
         <div className="Row flex flex-col items-center justify-center w-full h-full gap-4">
-            {row ? (
-                <div key={row.id} className='flex flex-col justify-around w-full p-4 border rounded-lg'
-                    onDrop={handleDrop}
-                    onDragOver={handleDragOver}
-                >
-                    <div className="flex flex-row justify-between items-center gap-4">
-                        <div className="w-min"
-                            onDragStart={handleDragStartRow}
-                            onDragEnd={handleDragEnd}
-                            draggable>
-                            =
-                        </div>
-                        <DeletionModal rowId={row.id} />
-                    </div>
-                    <div key={row.id} className='flex justify-between w-full p-4'>
-                        <div className="flex flex-row justify-between items-center w-full gap-4">
-                            <h2 className="text-lg font-bold text-black">{row.title}</h2>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                className="justify-self-start"
-                                id="demo-simple-select"
-                                value={rowState}
-                                label="Position"
-                                onChange={handleChange}
-                            >
-                                <MenuItem value={RowStateSelectText.start}>Left</MenuItem>
-                                <MenuItem value={RowStateSelectText.center}>Center</MenuItem>
-                                <MenuItem value={RowStateSelectText.end}>Right</MenuItem>
-                            </Select>
-                        </div>
-                    </div>
-                    <Products row={row}/>
-                </div>  
-            ) : (
-                <p>No rows available</p>
-            )}
+            <div key={row.id} className='flex flex-col justify-around w-full p-4 border rounded-lg'
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
+            >
+                <XIconDeletionRow row={row} handleDragStartRow={handleDragStartRow} handleDragEnd={handleDragEnd} />
+                <RowHeader row={row} handleChange={handleChange} />
+                <Products row={row}/>
+            </div>  
         </div>
     );
 };

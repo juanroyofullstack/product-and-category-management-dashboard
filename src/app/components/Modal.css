@@ -1,0 +1,5 @@
+.Modal {
+    .MuiButtonBase-root {
+        position: absolute !important;
+    }
+}

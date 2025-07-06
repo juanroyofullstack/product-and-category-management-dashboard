@@ -38,11 +38,11 @@ export const rowsInfoSlice = createSlice({
             state.push(action.payload);
         },
         increaseRowProductCount: (state, action: PayloadAction<number>) => {
-            const player = state.find(
+            const row = state.find(
                 (row) => row.id === action.payload,
             );
-            if(player) {
-                player.productsCount += 1;
+            if(row) {
+                row.productsCount += 1;
             }
         },
         removeRow: (state, action: PayloadAction<number>) => {
