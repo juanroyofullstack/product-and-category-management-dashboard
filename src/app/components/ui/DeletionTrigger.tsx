@@ -10,12 +10,12 @@ interface DeletionTriggerProps {
     onToggleDeleteButton?: () => void;
 }
 
-export const DeletionTrigger: React.FC<DeletionTriggerProps> = ({
+const DeletionTrigger = ({
     onDelete,
     isProductTrigger = false,
     showDeleteButton = false,
     onToggleDeleteButton,
-}) => {
+}: DeletionTriggerProps) => {
     if (isProductTrigger) {
         return (
             <div className="flex flex-col">
@@ -43,3 +43,5 @@ export const DeletionTrigger: React.FC<DeletionTriggerProps> = ({
         />
     );
 };
+
+export default DeletionTrigger;

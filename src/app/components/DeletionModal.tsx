@@ -3,8 +3,8 @@ import { useAppSelector, useAppDispatch } from '../lib/hooks';
 import { removeAllProductsAsociatedToRow, removeProduct } from '../lib/features/productsInfoSlice';
 import type { productsInfo } from '../lib/features/productsInfoSlice';
 import { removeRow, decreaseRowProductCount } from '../lib/features/rowsInfoSlice';
-import { DeletionModal } from './ui/DeletionModal';
-import { DeletionTrigger } from './ui/DeletionTrigger';
+import DeletionTrigger from './ui/DeletionTrigger';
+import UiModal from './ui/UiModal';
 
 export interface ModalProps {
     rowId?: number;
@@ -21,10 +21,10 @@ export interface DeletionModalProps {
     description: string;
 }
 
-export const RefactoredDeletionModal: React.FC<ModalProps> = ({ 
+export const DeletionModal = ({ 
     rowId, 
     product, 
-}) => {
+}: ModalProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
     
@@ -77,7 +77,7 @@ export const RefactoredDeletionModal: React.FC<ModalProps> = ({
                 showDeleteButton={showDeleteButton}
                 onToggleDeleteButton={handleToggleDeleteButton}
             />
-            <DeletionModal
+            <UiModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 onConfirm={handleConfirmDeletion}
@@ -88,4 +88,4 @@ export const RefactoredDeletionModal: React.FC<ModalProps> = ({
     );
 };
 
-export default RefactoredDeletionModal;
+export default DeletionModal;

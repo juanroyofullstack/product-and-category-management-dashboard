@@ -22,6 +22,7 @@ const ProductCard = ({ product }: { product: productsInfo })=> {
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             onPointerDown={e => e.stopPropagation()}
+            data-testid="product-card"
         >
             <div className="flex justify-between mb-2">
                 {product.title && <h3 className="text-md font-semibold mb-2">{product.title}</h3>}
@@ -40,7 +41,7 @@ const ProductCard = ({ product }: { product: productsInfo })=> {
                         />
                     ) : (
                         <div className="flex justify-center items-center w-full h-32 bg-gray-100 rounded">
-                            <ImageNotSupportedIcon className="text-gray-400" fontSize="large" />
+                            <ImageNotSupportedIcon className="text-gray-400" fontSize="large" data-testid="not-supported-image"/>
                         </div>
                     )}
                 </div>

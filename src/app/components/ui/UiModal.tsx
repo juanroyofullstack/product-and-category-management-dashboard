@@ -9,7 +9,7 @@ export interface DeletionModalProps {
     description: string;
 }
 
-export const DeletionModal: React.FC<DeletionModalProps> = ({
+const UiModal: React.FC<DeletionModalProps> = ({
     isOpen,
     onClose,
     onConfirm,
@@ -50,3 +50,5 @@ export const DeletionModal: React.FC<DeletionModalProps> = ({
         </Modal>
     );
 };
+
+export default UiModal;
