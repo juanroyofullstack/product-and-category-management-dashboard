@@ -1,0 +1,8 @@
+.ProductCard {
+    width: 200px;
+    height: 300px;
+
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+}

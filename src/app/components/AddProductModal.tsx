@@ -26,26 +26,70 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [uploading, setUploading] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    const dispatch = useAppDispatch();
-
-    const handleSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
-        e?.preventDefault();
-        dispatch(addProduct({
-            id: Date.now(),
-            title,
-            description,
-            image,
-            price: parseFloat(price),
-            row: rowId,
-        }));
-        dispatch(increaseRowProductCount(rowId));
+    const handleClose = () => {
+        setOpen(false);
         setTitle('');
         setPrice('');
         setDescription('');
         setImage('');
-        handleClose();
+        setImageFile(null);
+    };
+    const dispatch = useAppDispatch();
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setImageFile(file);
+            setImage('');
+        }
+    };
+
+    const uploadImage = async (file: File): Promise<string> => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to upload image');
+        }
+
+        const data = await response.json();
+        return data.url;
+    };
+
+    const handleSubmit = async (e?: React.FormEvent<HTMLFormElement>) => {
+        e?.preventDefault();
+        setUploading(true);
+
+        try {
+            let finalImageUrl = image;
+
+            if (imageFile) {
+                finalImageUrl = await uploadImage(imageFile);
+            }
+
+            dispatch(addProduct({
+                id: Date.now(),
+                title,
+                description,
+                image: finalImageUrl,
+                price: parseFloat(price),
+                row: rowId,
+            }));
+            dispatch(increaseRowProductCount(rowId));
+            handleClose();
+        } catch {
+            alert('Error uploading image. Please try again.');
+        } finally {
+            setUploading(false);
+        }
     };
     
     return (
@@ -89,27 +133,32 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
                             value={description}
                             onChange={e => setDescription(e.target.value)}
                         />
-                        <input
-                            type="text"
-                            placeholder="Image URL"
-                            required
-                            className="p-2 text-m text-black border-gray-700"
-                            value={image}
-                            onChange={e => setImage(e.target.value)}
-                        />
+                        <div className="flex flex-col gap-2">
+                            <label className="text-sm text-gray-600">Upload Image File:</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="p-2 text-m text-black border-gray-700"
+                                onChange={handleFileChange}
+                            />
+                        </div>
+
                     </div>
                     <div className="flex items-center justify-center gap-4 mt-4">
                         <Button
                             variant="contained"
                             color="secondary"
                             type='submit'
+                            disabled={uploading}
                         >
-                            Add
+                            {uploading ? 'Uploading...' : 'Add'}
                         </Button>
                         <Button
                             variant="contained"
                             color="secondary"
-                            onClick={handleClose}>
+                            onClick={handleClose}
+                            disabled={uploading}
+                        >
                             Cancel
                         </Button>
                     </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { updateProduct, productsInfo } from '../features/productsInfoSlice';
-import { reorderRows } from '../features/rowsInfoSlice';
+import { reorderRows, increaseRowProductCount, decreaseRowProductCount } from '../features/rowsInfoSlice';
 
 export const useDragAndDrop = () => {
     const [isDragging, setIsDragging] = useState(false);
@@ -12,9 +12,11 @@ export const useDragAndDrop = () => {
         dispatch(updateProduct({ productId: product.id, rowId: rowId}));
     };
     const handleReorderRows = (fromRowId: number, toRowId: number): void => {
-        // Dispatch an action to reorder rows
-        // This function should be implemented in your Redux slice
         dispatch(reorderRows({ fromRowId, toRowId }));
+    };
+    const handleUpdateRows = (productRowId: number, rowId: number): void => {
+        dispatch(increaseRowProductCount(rowId));
+        dispatch(decreaseRowProductCount(productRowId));
     };
     const handleDragging = (dragging: boolean) => setIsDragging(dragging);
     const handleDragEnd = () => handleDragging(false);
@@ -23,6 +25,7 @@ export const useDragAndDrop = () => {
         isDragging,
         handleUpdateList,
         handleReorderRows,
+        handleUpdateRows,
         handleDragging,
         handleDragEnd,
     };

@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from '@mui/material';
-import { rowsInfo, setLeft, setCenter, setRight, RowStateSelectText } from '../lib/features/rowsInfoSlice';
+import { rowsInfo, setLeft, setCenter, setRight, decreaseRowProductCount, increaseRowProductCount, RowStateSelectText } from '../lib/features/rowsInfoSlice';
 import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
 import { selectProductsByRow } from '../lib/selectors/selectors';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
@@ -9,7 +9,7 @@ import XIconDeletionRow from './ui/XIconDeletionRow';
 import ProductCard from './ProductCard';
 
 const Row = ({ row }: { row: rowsInfo }) => {
-    const { handleUpdateList, handleReorderRows, handleDragging, handleDragEnd } = useDragAndDrop();
+    const { handleUpdateList, handleReorderRows, handleDragging, handleDragEnd, handleUpdateRows } = useDragAndDrop();
     const products = useAppSelector(state => selectProductsByRow(state, row.id));
     const dispatch = useAppDispatch();
 
@@ -40,7 +40,12 @@ const Row = ({ row }: { row: rowsInfo }) => {
         } 
         if(productTransfer) {
             const product = JSON.parse(e.dataTransfer.getData('product'));
+            if(product.row === row.id) {
+                handleDragging(false);
+                return;
+            }
             handleUpdateList(product, row.id);
+            handleUpdateRows(product.row, row.id);
         }
         handleDragging(false);
     };
