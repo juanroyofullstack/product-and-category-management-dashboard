@@ -1,0 +1,67 @@
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { addProductsOnFetch } from './productsInfoSlice';
+import { addRowsOnFetch } from './rowsInfoSlice';
+import { getDashboardData } from '../api';
+
+interface DataState {
+    data: any[];
+    loading: boolean;
+    loaded: boolean;
+    error: string | null;
+}
+
+const initialState: DataState = {
+    data: [],
+    loading: false,
+    loaded: true,
+    error: null,
+};
+
+export const fetchData = createAsyncThunk<any>(
+    'dataFetch/fetchData',
+    async (_, thunkAPI) => {
+        try {
+            const response = await getDashboardData();
+            if (response.status !== 'success') throw new Error('Network response was not ok');
+            const data = await response.data;
+
+            thunkAPI.dispatch(addProductsOnFetch(data.products));
+            thunkAPI.dispatch(addRowsOnFetch(data.rows));
+
+            return data;
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    },
+);
+
+const dataFetchSlice = createSlice({
+    name: 'dataFetch',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchData.pending, (state) => {
+                state.loading = true;
+                state.loaded = false;
+                state.error = null;
+            })
+            .addCase(fetchData.fulfilled, (state, action: PayloadAction<any>) => {
+                state.loading = false;
+                state.loaded = true;
+                state.error = null;
+                if (action.payload) {
+                    state.data = action.payload.products;
+                } else {
+                    state.data = [];
+                }
+            })
+            .addCase(fetchData.rejected, (state, action) => {
+                state.loading = false;
+                state.loaded = true;
+                state.error = action.payload as string;
+            });
+    },
+});
+
+export default dataFetchSlice.reducer;

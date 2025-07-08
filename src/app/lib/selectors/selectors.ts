@@ -10,3 +10,9 @@ export const selectProductsByRow = createSelector(
 );
 
 export const selectRows = (state: RootState) => state.rows;
+
+export const selectDataIsFetchedWithoutErrors = (state: RootState) => state.dataFetch.loaded && !state.dataFetch.error;
+
+export const selectDataIsLoading = (state: RootState) => state.dataFetch.loading;
+
+export const selectDataIsLoadedWithErrors = (state: RootState) => state.dataFetch.loaded && state.dataFetch.error;

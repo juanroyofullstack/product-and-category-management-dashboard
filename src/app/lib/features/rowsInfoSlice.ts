@@ -27,13 +27,16 @@ export interface rowsInfo {
     productsCount: number;
 }
 
-const initialState: rowsInfo[] = rowMockData;
+const initialState: rowsInfo[] = [];
 
 
 export const rowsInfoSlice = createSlice({
     name: 'rowsInfo',
     initialState,
     reducers: {
+        addRowsOnFetch: (state, action: PayloadAction<rowsInfo[]>) => {
+            return state = action.payload;
+        },
         addRow: (state, action: PayloadAction<rowsInfo>) => {
             state.push(action.payload);
         },
@@ -88,6 +91,7 @@ export const rowsInfoSlice = createSlice({
 });
 
 export const {
+    addRowsOnFetch,
     addRow,
     increaseRowProductCount,
     removeRow,
