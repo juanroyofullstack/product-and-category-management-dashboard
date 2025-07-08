@@ -60,8 +60,8 @@ export default [
       'semi': ['error', 'always'],
       'quotes': ['error', 'single', { 'avoidEscape': true }],
       'comma-dangle': ['error', 'always-multiline'],
-      'no-unused-vars': 'warn',
-      '@typescript-eslint/no-unused-vars': ['warn'],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['off'],
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
     }

@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import useZoom from '../lib/hooks/useZoom';
 import ZoomInZoomOut from '../components/ui/ZoomInZoomOut';
 import ShowAddRowComponent from '../components/ShowAddRowComponent';
+import './RowContainer.css';
 
 interface RowContainerProps {
     children: ReactNode;
@@ -17,7 +18,7 @@ const RowContainer = ({ children }: RowContainerProps) => {
     });
 
     return (
-        <div className="RowContainer flex flex-col pt-20 w-full">
+        <div className="RowContainer flex flex-col pt-20 pb-10 w-full">
             <ZoomInZoomOut zoomIn={zoomIn} zoomOut={zoomOut} resetZoom={resetZoom} scale={scale} />
             <div className="RowContainer flex flex-col items-center justify-center w-full h-full  px-6 gap-4"   
                 style={{

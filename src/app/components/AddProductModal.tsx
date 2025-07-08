@@ -93,7 +93,7 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
     };
     
     return (
-        <div className="AddProductModal">
+        <div className="AddProductModal" data-testid="add-product-modal">
             <Button onClick={handleOpen}>Add product</Button>
             <Modal
                 open={open}
@@ -142,7 +142,6 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
                                 onChange={handleFileChange}
                             />
                         </div>
-
                     </div>
                     <div className="flex items-center justify-center gap-4 mt-4">
                         <Button

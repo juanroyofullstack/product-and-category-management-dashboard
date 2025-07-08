@@ -14,7 +14,7 @@ const XIconDeletionRow = ({
     handleDragEnd,
 }: XIconDeletionRowProps) => { 
     return (
-        <div className="flex flex-row justify-between items-center gap-4">
+        <div className="flex flex-row justify-between items-center gap-4" data-testid="x-icon-deletion-row">
             <div className="w-min"
                 onDragStart={handleDragStartRow}
                 onDragEnd={handleDragEnd}

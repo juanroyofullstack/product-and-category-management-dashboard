@@ -15,6 +15,7 @@ const ShowAddRowComponent = () => {
                 variant="contained"
                 color="primary"
                 onClick={() => setShowAddRow(true)}
+                data-testid="add-row-button"
             >
                 Add Row
             </Button>
@@ -38,12 +39,14 @@ const ShowAddRowComponent = () => {
                         placeholder="Enter row title"
                         className="p-2 border rounded"
                         onChange={(e) => setRowName(e.target.value)}
+                        data-testid="row-name-input"
                     />
                     <Button
                         variant="contained"
                         color="secondary"
                         type='submit'
                         disabled={!rowName}
+                        data-testid="save-row-button"
                     >
                         Save Row
                     </Button>

@@ -1,5 +1,5 @@
 import { SelectChangeEvent } from '@mui/material';
-import { rowsInfo, setLeft, setCenter, setRight, decreaseRowProductCount, increaseRowProductCount, RowStateSelectText } from '../lib/features/rowsInfoSlice';
+import { rowsInfo, setLeft, setCenter, setRight, RowStateSelectText } from '../lib/features/rowsInfoSlice';
 import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
 import { selectProductsByRow } from '../lib/selectors/selectors';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
@@ -59,7 +59,7 @@ const Row = ({ row }: { row: rowsInfo }) => {
     };
 
     return (
-        <div className="Row flex flex-col items-center justify-center w-full h-full gap-4">
+        <div className="Row flex flex-col items-center justify-center w-full h-full gap-4" data-testid="row">
             <div key={row.id} className='flex flex-col justify-around w-full p-4 border rounded-lg'
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}

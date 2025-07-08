@@ -17,7 +17,7 @@ const ProductCard = ({ product }: { product: productsInfo })=> {
 
     return ( 
         <div key={product.id} 
-            className="ProductCard flex flex-col justify-around p-4 border max-w-xs break-words rounded"
+            className="ProductCard flex flex-col justify-around p-4 border break-words rounded"
             draggable
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
