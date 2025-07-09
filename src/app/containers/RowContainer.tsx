@@ -22,7 +22,7 @@ const RowContainer = ({ children }: RowContainerProps) => {
     return (
         <div className="RowContainer flex flex-col pt-20 pb-10 w-full">
             <ZoomInZoomOut zoomIn={zoomIn} zoomOut={zoomOut} resetZoom={resetZoom} scale={scale} />
-            <div className="RowContainer flex flex-col items-center justify-center w-full h-full  px-6 gap-4"   
+            <div className="flex flex-col items-center justify-center w-full h-full px-6 gap-4"   
                 style={{
                     transform: `scale(${scale})`,
                     transformOrigin: 'center',

@@ -11,11 +11,6 @@ const Header = () => {
                         Dashboard
                     </Typography>
                 </Link>
-                <Link href="/profile">
-                    <Typography variant="h6" className="text-white">
-                        Profile
-                    </Typography>
-                </Link>
             </Toolbar>
         </AppBar>
     );

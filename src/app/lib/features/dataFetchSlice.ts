@@ -19,18 +19,18 @@ const initialState: DataState = {
 
 export const fetchData = createAsyncThunk<any>(
     'dataFetch/fetchData',
-    async (_, thunkAPI) => {
+    async (_, { dispatch }) => {
         try {
             const response = await getDashboardData();
             if (response.status !== 'success') throw new Error('Network response was not ok');
             const data = await response.data;
 
-            thunkAPI.dispatch(addProductsOnFetch(data.products));
-            thunkAPI.dispatch(addRowsOnFetch(data.rows));
+            dispatch(addProductsOnFetch(data.products));
+            dispatch(addRowsOnFetch(data.rows));
 
             return data;
         } catch (error: any) {
-            return thunkAPI.rejectWithValue(error.message);
+            return error.message;
         }
     },
 );
