@@ -53,7 +53,7 @@ const ProductCard = ({ product }: { product: productsInfo })=> {
                  </p>
                 }
                 {product.price && (
-                    <p className="text-lg font-bold text-green-600">${product.price.toFixed(2)}</p>
+                    <p className="text-lg font-bold text-black">{product.price.toFixed(2)}€</p>
                 )}
             </div>
         </div>
