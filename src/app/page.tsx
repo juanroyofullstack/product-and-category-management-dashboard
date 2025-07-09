@@ -4,11 +4,11 @@ import { useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
-import RowContainer from './containers/RowContainer';
+import RowContainer from './containers/CategoryContainer';
 import { selectRows, selectDataIsLoading, selectDataIsFetchedWithoutErrors, selectDataIsLoadedWithErrors } from './lib/selectors/selectors';
 import { useAppSelector, useAppDispatch } from './lib/hooks';
 import { fetchData } from './lib/features/dataFetchSlice';
-import Row from './components/Row';
+import Category from './components/Category';
 
 const theme = createTheme({
     palette: {
@@ -32,12 +32,12 @@ const theme = createTheme({
 });
 
 export default function Home() {
-    const rows = useAppSelector(selectRows);
+    const categories = useAppSelector(selectRows);
     const isDataLoading = useAppSelector(selectDataIsLoading);
     const isDataLoadedWithoutError = useAppSelector(selectDataIsFetchedWithoutErrors);
     const isDataWithError = useAppSelector(selectDataIsLoadedWithErrors);
     
-    const hasRows = rows.length > 0;
+    const hasRows = categories.length > 0;
 
     const dispatch = useAppDispatch();
 
@@ -56,9 +56,9 @@ export default function Home() {
                 )}
                 {isDataLoadedWithoutError && hasRows && (
                     <RowContainer>
-                        {rows.map((row) => (
-                            <div key={row.id} className='w-full'>
-                                <Row row={row} />
+                        {categories.map((category) => (
+                            <div key={category.id} className='w-full'>
+                                <Category category={category} />
                             </div>
                         ))}
                     </RowContainer>
@@ -70,7 +70,7 @@ export default function Home() {
                 )}
                 {!isDataLoading && !hasRows && (
                     <div className="flex items-center justify-center w-full h-full pt-40">
-                        <p className="text-gray-500">No rows available. Please add a row.</p>
+                        <p className="text-gray-500">No categories available. Please add a category.</p>
                     </div>
                 )}
             </div>

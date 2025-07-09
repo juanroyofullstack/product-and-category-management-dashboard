@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { rowsInfo, RowState } from '../lib/features/rowsInfoSlice';
 import { store } from '../lib/store';
-import Row from './Row';
+import Category from './Category';
 
 jest.mock('../lib/hooks/useDragAndDrop', () => ({
     useDragAndDrop: () => ({
@@ -13,7 +13,7 @@ jest.mock('../lib/hooks/useDragAndDrop', () => ({
 
 const mockRow: rowsInfo = {
     id: 1,
-    title: 'Test Row',
+    title: 'Test Category',
     state: RowState.LEFT,
     productsCount: 2,
 };
@@ -22,24 +22,24 @@ const mockRow: rowsInfo = {
 const renderComponent = (props: rowsInfo) => {
     return render(
         <Provider store={store}>
-            <Row row={props}/>
+            <Category category={props}/>
         </Provider>);
 };
 
-describe('Row Component', () => {   
+describe('Category Component', () => {   
     it('renders RowHeader and XIconDeletionRow', () => {
 
         const { getByText, getByTestId } = renderComponent(mockRow);
 
         expect(getByText(mockRow.title)).toBeInTheDocument();
-        expect(getByTestId('row-header')).toBeInTheDocument();
-        expect(getByTestId('x-icon-deletion-row')).toBeInTheDocument();
+        expect(getByTestId('category-header')).toBeInTheDocument();
+        expect(getByTestId('x-icon-deletion-category')).toBeInTheDocument();
     });
 
     it('renders Products component with correct props', () => {
         const mockRow: rowsInfo = {
             id: 1,
-            title: 'Test Row',
+            title: 'Test Category',
             state: RowState.LEFT,
             productsCount: 2,
         };

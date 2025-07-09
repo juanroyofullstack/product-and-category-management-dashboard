@@ -22,9 +22,9 @@ const ShowAddRowComponent = () => {
                 variant="contained"
                 color="primary"
                 onClick={() => setIsComponentVisible(true)}
-                data-testid="add-row-button"
+                data-testid="add-category-button"
             >
-                Add Row
+                Add Category
             </Button>
         );
     }
@@ -38,19 +38,19 @@ const ShowAddRowComponent = () => {
                 <div className="flex flex-col gap-2">
                     <input
                         type="text"
-                        placeholder="Enter row title"
+                        placeholder="Enter category title"
                         className="p-2 border rounded"
                         onChange={(e) => setRowName(e.target.value)}
-                        data-testid="row-name-input"
+                        data-testid="category-name-input"
                     />
                     <Button
                         variant="contained"
                         color="secondary"
                         type='submit'
                         disabled={!rowName}
-                        data-testid="save-row-button"
+                        data-testid="save-category-button"
                     >
-                        Save Row
+                        Save Category
                     </Button>
                 </div>
             </Box>

@@ -8,7 +8,7 @@ import { getDashboardData } from './api';
 export const store = configureStore({
     reducer: {
         products: productsInfoSlice,
-        rows: rowsInfoSlice,
+        categories: rowsInfoSlice,
         dataFetch: dataFetch,
     },
     middleware: getDefaultMiddleware =>

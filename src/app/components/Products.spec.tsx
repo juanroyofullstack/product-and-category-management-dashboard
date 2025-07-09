@@ -10,7 +10,7 @@ jest.mock('../lib/hooks', () => ({
 
 const mockRow: rowsInfo = {
     id: 1,
-    title: 'Test Row',
+    title: 'Test Category',
     state: RowState.LEFT,
     productsCount: 1,
 };
@@ -18,7 +18,7 @@ const mockRow: rowsInfo = {
 const renderComponent = (props: rowsInfo) => {
     return render(
         <Provider store={store}>
-            <Products row={props}>
+            <Products category={props}>
                 <div>Child Component</div>
             </Products>
         </Provider>);
@@ -31,13 +31,13 @@ describe('Products', () => {
         expect(getByText('Child Component')).toBeInTheDocument();       
     });
 
-    it('renders AddProductModal when row productsCount is less than 3', () => {
+    it('renders AddProductModal when category productsCount is less than 3', () => {
         const { getByTestId } = renderComponent(mockRow);
 
         expect(getByTestId('add-product-modal')).toBeInTheDocument();       
     });
 
-    it('does not render AddProductModal when row productsCount is than 3', () => {
+    it('does not render AddProductModal when category productsCount is than 3', () => {
         const { queryByTestId } = renderComponent({...mockRow, productsCount: 3});
 
         expect(queryByTestId('add-product-modal')).not.toBeInTheDocument();       

@@ -6,13 +6,13 @@ import useZoom from '../lib/hooks/useZoom';
 import { useAppSelector } from '../lib/hooks';
 import ZoomInZoomOut from '../components/ui/ZoomInZoomOut';
 import ShowAddRowComponent from '../components/ShowAddRowComponent';
-import './RowContainer.css';
+import './CategoryContainer.css';
 
-interface RowContainerProps {
+interface CategoryContainerProps {
     children: ReactNode;
 }
 
-const RowContainer = ({ children }: RowContainerProps) => { 
+const CategoryContainer = ({ children }: CategoryContainerProps) => { 
     const { scale, zoomIn, zoomOut, resetZoom } = useZoom({
         minScale: 0.5,
         maxScale: 2,
@@ -20,7 +20,7 @@ const RowContainer = ({ children }: RowContainerProps) => {
     });
 
     return (
-        <div className="RowContainer flex flex-col pt-20 pb-10 w-full">
+        <div className="CategoryContainer flex flex-col pt-20 pb-10 w-full">
             <ZoomInZoomOut zoomIn={zoomIn} zoomOut={zoomOut} resetZoom={resetZoom} scale={scale} />
             <div className="flex flex-col items-center justify-center w-full h-full px-6 gap-4"   
                 style={{
@@ -35,4 +35,4 @@ const RowContainer = ({ children }: RowContainerProps) => {
     );
 };
 
-export default RowContainer;
+export default CategoryContainer;

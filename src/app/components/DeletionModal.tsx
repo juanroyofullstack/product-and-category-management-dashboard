@@ -29,7 +29,7 @@ export const DeletionModal = ({
     const [showDeleteButton, setShowDeleteButton] = useState(false);
     
     const productsCount = useAppSelector(state => 
-        state.rows.find(row => row.id === rowId)?.productsCount,
+        state.categories.find(category => category.id === rowId)?.productsCount,
     );
     
     const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ export const DeletionModal = ({
     const getConfirmationMessage = () => {
         if (rowId && !product) {
             const hasProducts = productsCount && productsCount > 0;
-            return `You're about to delete a row${hasProducts ? ', all cards within it will be deleted as well.' : ''}`;
+            return `You're about to delete a category${hasProducts ? ', all cards within it will be deleted as well.' : ''}`;
         }
         if (product && !rowId) {
             return 'You\'re about to delete a product, this action cannot be undone.';
@@ -64,7 +64,7 @@ export const DeletionModal = ({
             dispatch(removeAllProductsAsociatedToRow(rowId));
         } else if (product && !rowId) {
             dispatch(removeProduct(product.id));
-            dispatch(decreaseRowProductCount(product.row));
+            dispatch(decreaseRowProductCount(product.category));
         }
         handleCloseModal();
     };

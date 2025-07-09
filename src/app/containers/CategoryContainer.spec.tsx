@@ -1,14 +1,14 @@
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../lib/store';
-import RowContainer from './RowContainer';
+import CategoryContainer from './CategoryContainer';
 
 const renderComponent = () => {
     return render(
         <Provider store={store}>
-            <RowContainer>
+            <CategoryContainer>
                 <div>Child Component</div>
-            </RowContainer>
+            </CategoryContainer>
         </Provider>,
     );
 };
@@ -28,6 +28,6 @@ describe('RowContainer', () => {
     it('renders RowContainer with ShowAddRowComponent', () => {
         const { getByTestId } = renderComponent();
 
-        expect(getByTestId('add-row-button')).toBeInTheDocument();
+        expect(getByTestId('add-category-button')).toBeInTheDocument();
     });
 });

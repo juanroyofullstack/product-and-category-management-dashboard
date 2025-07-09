@@ -26,7 +26,7 @@ export const fetchData = createAsyncThunk<any>(
             const data = await response.data;
 
             dispatch(addProductsOnFetch(data.products));
-            dispatch(addRowsOnFetch(data.rows));
+            dispatch(addRowsOnFetch(data.categories));
 
             return data;
         } catch (error: any) {

@@ -26,84 +26,84 @@ describe('ShowAddRowComponent', () => {
         );
     };
 
-    it('renders Add Row button when showAddRow is false', () => {
+    it('renders Add Category button when showAddRow is false', () => {
         const { getByText } = renderComponent();
-        expect(getByText('Add Row')).toBeInTheDocument();
+        expect(getByText('Add Category')).toBeInTheDocument();
     });
 
-    it('shows input and Save Row button when Add Row button is clicked', async () => {
+    it('shows input and Save Category button when Add Category button is clicked', async () => {
         const { getByText, getByTestId, getByPlaceholderText } = renderComponent();
-        const addButton = getByTestId('add-row-button');
+        const addButton = getByTestId('add-category-button');
         
         fireEvent.click(addButton);
 
         await waitFor(() => {
-            expect(getByPlaceholderText('Enter row title')).toBeInTheDocument();
-            expect(getByText('Save Row')).toBeInTheDocument();
+            expect(getByPlaceholderText('Enter category title')).toBeInTheDocument();
+            expect(getByText('Save Category')).toBeInTheDocument();
         });
     });
 
     it('allows typing in the input field', async () => {
         const { getByTestId, getByPlaceholderText } = renderComponent();
-        const addButton = getByTestId('add-row-button');
+        const addButton = getByTestId('add-category-button');
         
         fireEvent.click(addButton);
 
         await waitFor(() => {
-            const input = getByPlaceholderText('Enter row title');
-            fireEvent.change(input, { target: { value: 'Test Row Title' } });
-            expect(input).toHaveValue('Test Row Title');
+            const input = getByPlaceholderText('Enter category title');
+            fireEvent.change(input, { target: { value: 'Test Category Title' } });
+            expect(input).toHaveValue('Test Category Title');
         });
     });
 
-    it('Save Row button is disabled when input is empty', async () => {
+    it('Save Category button is disabled when input is empty', async () => {
         const { getByTestId, getByText } = renderComponent();
-        const addButton = getByTestId('add-row-button');
+        const addButton = getByTestId('add-category-button');
         
         fireEvent.click(addButton);
 
         await waitFor(() => {
-            const saveButton = getByText('Save Row');
+            const saveButton = getByText('Save Category');
             expect(saveButton).toBeDisabled();
         });
     });
 
-    it('Save Row button is enabled when input has value', async () => {
+    it('Save Category button is enabled when input has value', async () => {
         const { getByTestId, getByText, getByPlaceholderText } = renderComponent();
-        const addButton = getByTestId('add-row-button');
+        const addButton = getByTestId('add-category-button');
         
         fireEvent.click(addButton);
 
         await waitFor(async () => {
-            const input = getByTestId('row-name-input');
+            const input = getByTestId('category-name-input');
             expect(input).toBeInTheDocument();
-            fireEvent.change(input, { target: { value: 'Test Row Title' } });
+            fireEvent.change(input, { target: { value: 'Test Category Title' } });
             
-            const saveButton = getByText('Save Row');
+            const saveButton = getByText('Save Category');
             expect(saveButton).not.toBeDisabled();
         });
     });
 
-    it('dispatches addRow action and resets form when Save Row is clicked', async () => {
+    it('dispatches addRow action and resets form when Save Category is clicked', async () => {
         const { getByTestId, getByText } = renderComponent();
-        const addButton = getByTestId('add-row-button');
+        const addButton = getByTestId('add-category-button');
         
         fireEvent.click(addButton);
 
         await waitFor(async () => {
-            const input = getByTestId('row-name-input');
-            fireEvent.change(input, { target: { value: 'Test Row Title' } });
-            expect(input).toHaveValue('Test Row Title');
-            const saveButton = getByTestId('save-row-button');
+            const input = getByTestId('category-name-input');
+            fireEvent.change(input, { target: { value: 'Test Category Title' } });
+            expect(input).toHaveValue('Test Category Title');
+            const saveButton = getByTestId('save-category-button');
             expect(saveButton).toBeInTheDocument();
 
             fireEvent.click(saveButton);
 
             expect(mockDispatch).toHaveBeenCalledWith(
                 {
-                    type: 'rows/addRow',
+                    type: 'categories/addRow',
                     payload: {
-                        title: 'Test Row Title',
+                        title: 'Test Category Title',
                         state: 'start',
                         productsCount: 0,
                     },

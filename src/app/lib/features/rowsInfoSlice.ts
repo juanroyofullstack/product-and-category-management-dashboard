@@ -14,7 +14,7 @@ export enum RowStateSelectText {
 const rowMockData: rowsInfo[] = [
     {
         id: 1,
-        title: 'Row 1',
+        title: 'Category 1',
         state: RowState.LEFT,
         productsCount: 1,
     },  
@@ -41,50 +41,50 @@ export const rowsInfoSlice = createSlice({
             state.push(action.payload);
         },
         increaseRowProductCount: (state, action: PayloadAction<number>) => {
-            const row = state.find(
-                (row) => row.id === action.payload,
+            const category = state.find(
+                (category) => category.id === action.payload,
             );
-            if(row) {
-                row.productsCount += 1;
+            if(category) {
+                category.productsCount += 1;
             }
         },
         removeRow: (state, action: PayloadAction<number>) => {
-            return state.filter((row) => row.id !== action.payload);
+            return state.filter((category) => category.id !== action.payload);
         },
         decreaseRowProductCount: (state, action: PayloadAction<number | undefined>) => {
-            const row = state.find(
-                (row) => row.id === action.payload,
+            const category = state.find(
+                (category) => category.id === action.payload,
             );
-            if(row) {
-                row.productsCount -= 1;
+            if(category) {
+                category.productsCount -= 1;
             }
         },
         updateRow: (state, action: PayloadAction<rowsInfo>) => {
-            return state.map((row) =>
-                row.id === action.payload.id ? action.payload : row,
+            return state.map((category) =>
+                category.id === action.payload.id ? action.payload : category,
             );
         },
         reorderRows: (state, action: PayloadAction<{ fromRowId: number, toRowId: number }>) => {
             const { fromRowId, toRowId } = action.payload;
-            const fromIndex = state.findIndex(row => row.id === fromRowId);
-            const toIndex = state.findIndex(row => row.id === toRowId);
+            const fromIndex = state.findIndex(category => category.id === fromRowId);
+            const toIndex = state.findIndex(category => category.id === toRowId);
             if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return;
             const [movedRow] = state.splice(fromIndex, 1);
             state.splice(toIndex, 0, movedRow);
         },
         setLeft: (state, action: PayloadAction<number>) => {
-            return state.map((row) =>
-                row.id === action.payload ? { ...row, state: RowState.LEFT } : row,
+            return state.map((category) =>
+                category.id === action.payload ? { ...category, state: RowState.LEFT } : category,
             );
         },
         setCenter: (state, action: PayloadAction<number>) => {
-            return state.map((row) =>
-                row.id === action.payload ? { ...row, state: RowState.CENTER } : row,
+            return state.map((category) =>
+                category.id === action.payload ? { ...category, state: RowState.CENTER } : category,
             );
         },
         setRight: (state, action: PayloadAction<number>) => {
-            return state.map((row) =>
-                row.id === action.payload ? { ...row, state: RowState.RIGHT } : row,
+            return state.map((category) =>
+                category.id === action.payload ? { ...category, state: RowState.RIGHT } : category,
             );
         },
     },

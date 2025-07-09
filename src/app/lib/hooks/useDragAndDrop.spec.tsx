@@ -61,7 +61,7 @@ describe('useDragAndDrop', () => {
             description: 'Test Description',
             image: 'https://via.placeholder.com/150',
             price: 100,
-            row: 1,
+            category: 1,
         };
 
         act(() => {

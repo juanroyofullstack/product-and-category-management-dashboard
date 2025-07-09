@@ -25,7 +25,7 @@ describe('ProductCard', () => {
         description: 'This is a test product.',
         price: 19.99,
         image: 'https://example.com/image.jpg',
-        row: 1,
+        category: 1,
     };
 
     it('renders product title, description, and price', () => {

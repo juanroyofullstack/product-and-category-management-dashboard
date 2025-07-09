@@ -6,10 +6,10 @@ export const selectProductsByRow = createSelector(
         (state: RootState) => state.products,
         (_: RootState, rowId: number) => rowId,
     ],
-    (products, rowId) => products.filter(product => product.row === rowId),
+    (products, rowId) => products.filter(product => product.category === rowId),
 );
 
-export const selectRows = (state: RootState) => state.rows;
+export const selectRows = (state: RootState) => state.categories;
 
 export const selectDataIsFetchedWithoutErrors = (state: RootState) => state.dataFetch.loaded && !state.dataFetch.error;
 

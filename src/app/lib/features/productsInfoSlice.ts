@@ -7,7 +7,7 @@ export const productsMockData = [
         description: 'Description for Product 1',
         image: 'https://via.placeholder.com/150',
         price: 19.99,
-        row: 1,
+        category: 1,
     },
 ];
 
@@ -17,7 +17,7 @@ export interface productsInfo {
     description: string;
     image: string;
     price: number;
-    row: number;
+    category: number;
 }
 
 const initialState: productsInfo[] = [];
@@ -36,12 +36,12 @@ export const productsInfoSlice = createSlice({
             return state.filter((product) => product.id !== action.payload);
         },
         removeAllProductsAsociatedToRow: (state, action: PayloadAction<number>) => {
-            return state.filter((product) => product.row !==  action.payload);
+            return state.filter((product) => product.category !==  action.payload);
         },
         updateProduct: (state, action: PayloadAction<{ productId: number; rowId: number; }>) => {
             const index = state.findIndex(product => product.id === action.payload.productId);
             if (index !== -1) {
-                state[index].row = action.payload.rowId;
+                state[index].category = action.payload.rowId;
             }
         },
     },

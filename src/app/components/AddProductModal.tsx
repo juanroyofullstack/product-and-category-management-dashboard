@@ -80,7 +80,7 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
                 description,
                 image: finalImageUrl,
                 price: parseFloat(price),
-                row: rowId,
+                category: rowId,
             }));
             dispatch(increaseRowProductCount(rowId));
             handleClose();

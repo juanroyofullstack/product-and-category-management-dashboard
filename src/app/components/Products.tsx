@@ -3,7 +3,7 @@ import { rowsInfo } from '../lib/features/rowsInfoSlice';
 import AddProductModal from './AddProductModal';
 
 interface ProductsProps {
-    row: rowsInfo;
+    category: rowsInfo;
     children: ReactNode;
 }
 
@@ -13,14 +13,14 @@ const justifyMap: Record<string, string> = {
     end: 'justify-end',
 };
 
-const Products = ({ row, children }: ProductsProps) => {
+const Products = ({ category, children }: ProductsProps) => {
     return (
         <>
-            <div className={`Products flex flex-wrap items-center ${justifyMap[row.state]} w-full h-full gap-4 pb-2`} data-testid="products">
+            <div className={`Products flex flex-wrap items-center ${justifyMap[category.state]} w-full h-full gap-4 pb-2`} data-testid="products">
                 {children}
             </div>   
             <div className="flex items-center justify-end w-full h-full gap-4">
-                {row.productsCount < 3 && <AddProductModal rowId={row.id} />}
+                {category.productsCount < 3 && <AddProductModal rowId={category.id} />}
             </div>  
         </>
     );

@@ -7,7 +7,7 @@ export const mockData = {
                 description: 'This is a mock product description.',
                 image: 'https://via.placeholder.com/150',
                 price: 29.99,
-                row: 1,
+                category: 1,
             },
             {
                 id: 2,
@@ -15,25 +15,25 @@ export const mockData = {
                 description: 'This is another mock product description.',
                 image: 'https://via.placeholder.com/150',
                 price: 39.99,
-                row: 2,
+                category: 2,
             },
         ],
-        rows: [
+        categories: [
             {
                 id: 1,
-                title: 'Row 1',         
+                title: 'Category 1',         
                 state: 'start',
                 productsCount: 1,
             },
             {
                 id: 2,  
-                title: 'Row 2',
+                title: 'Category 2',
                 state: 'center',
                 productsCount: 1,
             },
             {
                 id: 3,
-                title: 'Row 3',
+                title: 'Category 3',
                 state: 'end',
                 productsCount: 0,
             },
