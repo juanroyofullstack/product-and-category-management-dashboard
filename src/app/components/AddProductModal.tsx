@@ -14,7 +14,6 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 24,
     p: 4,
@@ -100,16 +99,19 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
+
             >
                 <Box sx={style} 
                     component="form"
+                    className='bg-white'
                     onSubmit={e => {
                         handleSubmit(e);
-                    }}>
+                    }}
+                >
                     <Typography id="modal-modal-title" variant="h6" component="h2" className="text-black pb-2">
                             Add Product
                     </Typography>
-                    <div className="gap-4 flex flex-col">
+                    <div className="gap-4 flex flex-col bg-white">
                         <input
                             type="text"
                             placeholder="Title"

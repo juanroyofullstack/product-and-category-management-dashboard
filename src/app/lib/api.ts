@@ -7,7 +7,7 @@ function isCode200() {
 export function getDashboardData() {
     return fetchMockData()
         .then((data: any) => { return data; })
-        .catch(error => console.error(error));
+        .catch(error => error.message);
 }
 
 function fetchMockData() {

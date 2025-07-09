@@ -18,14 +18,14 @@ const ProductCard = ({ product }: { product: productsInfo })=> {
     return ( 
         <div key={product.id} 
             className="ProductCard flex flex-col justify-around p-4 border break-words rounded"
-            draggable
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             onPointerDown={e => e.stopPropagation()}
+            draggable
             data-testid="product-card"
         >
-            <div className="flex justify-between mb-2">
-                {product.title && <h3 className="text-md font-semibold mb-2">{product.title}</h3>}
+            <div className="flex justify-between mb-2 relative">
+                {product.title && <h3 className="text-md z-5 font-semibold mb-2 text-black">{product.title}</h3>}
                 <DeletionModal product={product} />
             </div>
             {product.image && (
@@ -47,7 +47,11 @@ const ProductCard = ({ product }: { product: productsInfo })=> {
                 </div>
             )}
             <div className="">
-                {product.description && <p className="text-sm text-gray-600 mb-2">{product.description}</p>}
+                {product.description &&
+                 <p className="text-sm text-gray-600 mb-2">
+                     {product.description}
+                 </p>
+                }
                 {product.price && (
                     <p className="text-lg font-bold text-green-600">${product.price.toFixed(2)}</p>
                 )}

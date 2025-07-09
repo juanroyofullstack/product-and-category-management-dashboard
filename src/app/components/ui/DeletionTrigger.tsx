@@ -18,7 +18,7 @@ const DeletionTrigger = ({
 }: DeletionTriggerProps) => {
     if (isProductTrigger) {
         return (
-            <div className="flex flex-col">
+            <div className="flex flex-col absolute right-0 top-0 z-10">
                 <MoreHorizIcon 
                     className="self-end" 
                     onClick={onToggleDeleteButton} 
@@ -26,7 +26,7 @@ const DeletionTrigger = ({
                 {showDeleteButton && (
                     <Button 
                         variant="contained"
-                        className="self-end w-min absolute top-7 right-0 z-10"
+                        className="self-end w-min"
                         onClick={onDelete}
                     >
                         Delete

@@ -1,9 +1,9 @@
 import { SelectChangeEvent } from '@mui/material';
 import { rowsInfo, setLeft, setCenter, setRight, RowStateSelectText } from '../lib/features/rowsInfoSlice';
+import Products from '../components/Products';
 import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
 import { selectProductsByRow } from '../lib/selectors/selectors';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
-import Products from '../components/Products';
 import RowHeader from './ui/RowHeader';
 import XIconDeletionRow from './ui/XIconDeletionRow';
 import ProductCard from './ProductCard';
@@ -34,7 +34,7 @@ const Row = ({ row }: { row: rowsInfo }) => {
         e.preventDefault();
         const productTransfer = e.dataTransfer.getData('product');
         const rowTransfer = e.dataTransfer.getData('row');
-        if(rowTransfer) {
+        if(rowTransfer && !productTransfer) {
             const rowTransfer = JSON.parse(e.dataTransfer.getData('row'));
             handleReorderRows(rowTransfer.id, row.id);
         } 
@@ -63,8 +63,12 @@ const Row = ({ row }: { row: rowsInfo }) => {
             <div key={row.id} className='flex flex-col justify-around w-full p-4 border rounded-lg'
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
+                onDragStart={handleDragStartRow} 
+                onDragEnd={handleDragEnd}
+                onPointerDown={e => e.stopPropagation()}
+                draggable
             >
-                <XIconDeletionRow row={row} handleDragStartRow={handleDragStartRow} handleDragEnd={handleDragEnd} />
+                <XIconDeletionRow row={row} />
                 <RowHeader row={row} handleChange={handleChange} />
                 <Products  row={row}>
                     {products && products.map((product) => (

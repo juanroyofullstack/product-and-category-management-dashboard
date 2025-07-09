@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Button, Box } from '@mui/material';
 import { useAppDispatch } from '../lib/hooks';
+import useClickOutside from '../lib/hooks/useClickOutside';
 import { addRow, RowState } from '../lib/features/rowsInfoSlice';
 
 const ShowAddRowComponent = () => {
     const [rowName, setRowName] = useState('');
-    const [showAddRow, setShowAddRow] = useState(false);
-
+    const { ref, isComponentVisible, setIsComponentVisible } = useClickOutside(false);
     const dispatch = useAppDispatch();
     
-    if (!showAddRow) {
+    const handleAddRowClick = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsComponentVisible(false);
+        dispatch(addRow({ id: Date.now(), title: rowName, state: RowState.LEFT, productsCount: 0 }));
+        setRowName('');
+    };
+
+    if (!isComponentVisible) {
         return (
             <Button
                 variant="contained"
                 color="primary"
-                onClick={() => setShowAddRow(true)}
+                onClick={() => setIsComponentVisible(true)}
                 data-testid="add-row-button"
             >
                 Add Row
@@ -23,15 +30,10 @@ const ShowAddRowComponent = () => {
     }
     
     return (
-        <div className="flex flex-col items-center justify-center w-full h-full gap-4">
+        <div className="flex flex-col items-center justify-center h-full gap-4" ref={ref}>
             <Box
                 component="form"
-                onSubmit={e => {
-                    e.preventDefault();
-                    setShowAddRow(false);
-                    dispatch(addRow({ id: Date.now(), title: rowName, state: RowState.LEFT, productsCount: 0 }));
-                    setRowName('');
-                }}
+                onSubmit={e => handleAddRowClick(e)}
             >
                 <div className="flex flex-col gap-2">
                     <input

@@ -8,10 +8,15 @@ const ZoomInZoomOut = ({zoomIn, zoomOut, resetZoom, scale}: {
 }) => { 
     return  (
         <div className="Controls flex items-center gap-2 pl-7 pb-5 z-10" data-testid="zoom-controls">
-            <Button onClick={zoomOut}>-</Button>
+            <Button onClick={zoomOut} 
+                variant="contained"
+                color="primary">-</Button>
             <span className="Controls-percentage text-black">{Math.round(scale * 100)}%</span>
-            <Button onClick={zoomIn}>+</Button>
-            <Button onClick={resetZoom}>Reset</Button>
+            <Button onClick={zoomIn} variant="contained"
+                color="primary">+</Button>
+            <Button onClick={resetZoom} 
+                variant="contained"
+                color="primary">Reset</Button>
         </div>
     );
 };
