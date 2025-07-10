@@ -26,7 +26,7 @@ const renderComponent = (props: categoriesInfo) => {
         </Provider>);
 };
 
-describe('Category Component', () => {   
+describe('Category', () => {   
     it('renders CategoryHeader and XIconDeletionCategory', () => {
         const { getByText, getByTestId } = renderComponent(mockCategory);
 

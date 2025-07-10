@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import Header from './Header';
 
-describe('Header Component', () => {
+describe('Header', () => {
     it('renders the header with Dashboard and Profile links', () => {
         const { getByText } = render(<Header />);
         

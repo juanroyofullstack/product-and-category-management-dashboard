@@ -15,7 +15,7 @@ const renderComponent = () => {
     );
 };  
 
-describe('ZoomInZoomOut Component', () => {
+describe('ZoomInZoomOut', () => {
     it('renders ZoomInZoomOut with correct props', () => {
         const { getByTestId } = renderComponent();
 

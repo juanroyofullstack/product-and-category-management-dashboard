@@ -18,7 +18,7 @@ const mockCategory: categoriesInfo = {
     productsCount: 1,
 };
 
-describe('CategoryHeader Component', () => {   
+describe('CategoryHeader', () => {   
     it('renders CategoryHeader with correct props', () => {
 
         const { getByText, getByTestId } = renderComponent(mockCategory);

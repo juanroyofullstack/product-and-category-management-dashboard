@@ -11,39 +11,39 @@ const defaultProps: DeletionModalProps = {
 };
 
 describe('UiModal', () => {
-
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
     it('renders the modal with title and description', () => {
-        render(<UiModal {...defaultProps} />);
-        expect(screen.getByText(defaultProps.title)).toBeInTheDocument();
-        expect(screen.getByText(defaultProps.description)).toBeInTheDocument();
+        const { getByText } = render(<UiModal {...defaultProps} />);
+
+        expect(getByText(defaultProps.title)).toBeInTheDocument();
+        expect(getByText(defaultProps.description)).toBeInTheDocument();
     });
 
     it('renders Delete and Cancel buttons', () => {
-        render(<UiModal {...defaultProps} />);
-        expect(screen.getByText('Delete')).toBeInTheDocument();
-        expect(screen.getByText('Cancel')).toBeInTheDocument();
+        const { getByText } = render(<UiModal {...defaultProps} />);
+
+        expect(getByText('Delete')).toBeInTheDocument();
+        expect(getByText('Cancel')).toBeInTheDocument();
     });
 
     it('calls onConfirm when Delete button is clicked', () => {
-        render(<UiModal {...defaultProps} />);
-        fireEvent.click(screen.getByText('Delete'));
+        const { getByText } = render(<UiModal {...defaultProps} />);
+        fireEvent.click(getByText('Delete'));
+
         expect(defaultProps.onConfirm).toHaveBeenCalledTimes(1);
     });
 
     it('calls onClose when Cancel button is clicked', () => {
-        render(<UiModal {...defaultProps} />);
-        fireEvent.click(screen.getByText('Cancel'));
+        const { getByText } = render(<UiModal {...defaultProps} />);
+
+        fireEvent.click(getByText('Cancel'));
+
         expect(defaultProps.onClose).toHaveBeenCalledTimes(1);
     });
 
     it('does not render modal content when isOpen is false', () => {
-        render(<UiModal {...defaultProps} isOpen={false} />);
-        expect(screen.queryByText(defaultProps.title)).not.toBeInTheDocument();
-        expect(screen.queryByText(defaultProps.description)).not.toBeInTheDocument();
+        const { queryByText } = render(<UiModal {...defaultProps} isOpen={false} />);
 
+        expect(queryByText(defaultProps.title)).not.toBeInTheDocument();
+        expect(queryByText(defaultProps.description)).not.toBeInTheDocument();
     });
 });

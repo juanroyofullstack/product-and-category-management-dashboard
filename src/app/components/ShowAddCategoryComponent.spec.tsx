@@ -82,33 +82,5 @@ describe('ShowAddCategoryComponent', () => {
             const saveButton = getByText('Save Category');
             expect(saveButton).not.toBeDisabled();
         });
-    });
-
-    // it('dispatches addCategory action and resets form when Save Category is clicked', async () => {
-    //     const { getByTestId, getByText } = renderComponent();
-    //     const addButton = getByTestId('add-category-button');
-        
-    //     fireEvent.click(addButton);
-
-    //     await waitFor(async () => {
-    //         const input = getByTestId('category-name-input');
-    //         fireEvent.change(input, { target: { value: 'Test Category Title' } });
-    //         expect(input).toHaveValue('Test Category Title');
-    //         const saveButton = getByTestId('save-category-button');
-    //         expect(saveButton).toBeInTheDocument();
-
-    //         fireEvent.click(saveButton);
-
-    //         expect(mockDispatch).toHaveBeenCalledWith(
-    //             {
-    //                 type: 'categories/addCategory',
-    //                 payload: {
-    //                     title: 'Test Category Title',
-    //                     state: 'start',
-    //                     productsCount: 0,
-    //                 },
-    //             },
-    //         );
-    //     });
-    // });
+    });   
 });
