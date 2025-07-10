@@ -1,9 +1,9 @@
-import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { MenuItem, Select } from '@mui/material';
 import { categoriesInfo, CategoryStateSelectText } from '../../lib/features/categoriesInfoSlice';
 
 interface CategoryHeaderProps {
     category: categoriesInfo;
-    handleChange: (e: SelectChangeEvent) => void;
+    handleChange: () => void;
 }
 
 const CategoryHeader = ({
@@ -19,7 +19,6 @@ const CategoryHeader = ({
                     value={CategoryStateSelectText[category.state]}
                     onChange={handleChange}
                     sx={{ color: 'black' }}
-
                 >
                     <MenuItem
                         value={CategoryStateSelectText.start}

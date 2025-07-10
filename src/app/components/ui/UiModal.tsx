@@ -22,6 +22,7 @@ const UiModal: React.FC<DeletionModalProps> = ({
             onClose={onClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
+            data-testid="deletion-modal"
         >
             <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-white border-2 border-black shadow-2xl p-4">
                 <Typography id="modal-modal-title" variant="h6" component="h2" className="text-black pb-2">

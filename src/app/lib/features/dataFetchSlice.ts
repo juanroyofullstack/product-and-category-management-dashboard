@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { addProductsOnFetch } from './productsInfoSlice';
 import { addCategoriesOnFetch } from './categoriesInfoSlice';
 import { getDashboardData } from '../api';
@@ -44,7 +44,7 @@ const dataFetchSlice = createSlice({
                 state.loaded = false;
                 state.error = null;
             })
-            .addCase(fetchData.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(fetchData.fulfilled, (state) => {
                 state.loading = false;
                 state.loaded = true;
                 state.error = null;

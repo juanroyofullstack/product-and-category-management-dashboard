@@ -18,22 +18,22 @@ const renderComponent = (props: productsInfo) => {
         </Provider>);
 };
 
-describe('ProductCard', () => {
-    const mockProduct = {
-        id: 1,
-        title: 'Test Product',
-        description: 'This is a test product.',
-        price: 19.99,
-        image: 'https://example.com/image.jpg',
-        category: 1,
-    };
+const mockProduct = {
+    id: 1,
+    title: 'Test Product',
+    description: 'This is a test product.',
+    price: 19.99,
+    image: 'https://example.com/image.jpg',
+    category: 1,
+};
 
+describe('ProductCard', () => {
     it('renders product title, description, and price', () => {
         const { getByText } = renderComponent(mockProduct);
         
         expect(getByText(mockProduct.title)).toBeInTheDocument();
         expect(getByText(mockProduct.description)).toBeInTheDocument();
-        expect(getByText(`$${mockProduct.price.toFixed(2)}`)).toBeInTheDocument();
+        expect(getByText(`${mockProduct.price.toFixed(2)}€`)).toBeInTheDocument();
     });
 
     it('renders product image', () => {
