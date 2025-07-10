@@ -2,14 +2,14 @@ import { render, waitFor, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { useAppDispatch } from '../lib/hooks';
 import { store } from '../lib/store';
-import ShowAddRowComponent from './ShowAddRowComponent';
+import ShowAddCategoryComponent from './ShowAddCategoryComponent';
 
 jest.mock('../lib/hooks', () => ({
     ...jest.requireActual('../lib/hooks'),
     useAppDispatch: jest.fn(),
 }));
 
-describe('ShowAddRowComponent', () => {
+describe('ShowAddCategoryComponent', () => {
     const mockDispatch = jest.fn();
     const useAppDispatchMock = useAppDispatch as jest.Mock;
     
@@ -21,12 +21,12 @@ describe('ShowAddRowComponent', () => {
     const renderComponent = () => {
         return render(
             <Provider store={store}>
-                <ShowAddRowComponent />
+                <ShowAddCategoryComponent />
             </Provider>,
         );
     };
 
-    it('renders Add Category button when showAddRow is false', () => {
+    it('renders Add Category button when showAddCategory is false', () => {
         const { getByText } = renderComponent();
         expect(getByText('Add Category')).toBeInTheDocument();
     });
@@ -84,7 +84,7 @@ describe('ShowAddRowComponent', () => {
         });
     });
 
-    it('dispatches addRow action and resets form when Save Category is clicked', async () => {
+    it('dispatches addCategory action and resets form when Save Category is clicked', async () => {
         const { getByTestId, getByText } = renderComponent();
         const addButton = getByTestId('add-category-button');
         
@@ -101,7 +101,7 @@ describe('ShowAddRowComponent', () => {
 
             expect(mockDispatch).toHaveBeenCalledWith(
                 {
-                    type: 'categories/addRow',
+                    type: 'categories/addCategory',
                     payload: {
                         title: 'Test Category Title',
                         state: 'start',

@@ -1,15 +1,15 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-export const selectProductsByRow = createSelector(
+export const selectProductsByCategory = createSelector(
     [
         (state: RootState) => state.products,
-        (_: RootState, rowId: number) => rowId,
+        (_: RootState, categoryId: number) => categoryId,
     ],
-    (products, rowId) => products.filter(product => product.category === rowId),
+    (products, categoryId) => products.filter(product => product.category === categoryId),
 );
 
-export const selectRows = (state: RootState) => state.categories;
+export const selectCategory = (state: RootState) => state.categories;
 
 export const selectDataIsFetchedWithoutErrors = (state: RootState) => state.dataFetch.loaded && !state.dataFetch.error;
 

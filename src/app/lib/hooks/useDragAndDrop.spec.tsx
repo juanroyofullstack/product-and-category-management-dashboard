@@ -70,41 +70,41 @@ describe('useDragAndDrop', () => {
 
         expect(mockDispatch).toHaveBeenCalledWith({
             type: 'productsInfo/updateProduct',
-            payload: { productId: 1, rowId: 2 },
+            payload: { productId: 1, categoryId: 2 },
         });
     });
 
-    it('should call dispatch when handleReorderRows is called', () => {
+    it('should call dispatch when handleReorderCategories is called', () => {
         renderHookWithProvider((hook) => {
             hookResult = hook;
         });
 
         act(() => {
-            hookResult.handleReorderRows(1, 2);
+            hookResult.handleReordercategorys(1, 2);
         });
 
         expect(mockDispatch).toHaveBeenCalledWith({
-            type: 'rowsInfo/reorderRows',
-            payload: { fromRowId: 1, toRowId: 2 },
+            type: 'categorysInfo/reorderCategories',
+            payload: { fromcategoryId: 1, tocategoryId: 2 },
         });
     });
 
-    it('should call dispatch twice when handleUpdateRows is called', () => {
+    it('should call dispatch twice when handleUpdateCategories is called', () => {
         renderHookWithProvider((hook) => {
             hookResult = hook;
         });
 
         act(() => {
-            hookResult.handleUpdateRows(1, 2);
+            hookResult.handleUpdateCategories(1, 2);
         });
 
         expect(mockDispatch).toHaveBeenCalledTimes(2);
         expect(mockDispatch).toHaveBeenNthCalledWith(1, {
-            type: 'rowsInfo/increaseRowProductCount',
+            type: 'categorysInfo/increaseCategoryProductCount',
             payload: 2,
         });
         expect(mockDispatch).toHaveBeenNthCalledWith(2, {
-            type: 'rowsInfo/decreaseRowProductCount',
+            type: 'categorysInfo/decreaseCategoryProductCount',
             payload: 1,
         });
     });

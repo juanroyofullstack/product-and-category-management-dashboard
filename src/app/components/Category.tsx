@@ -1,42 +1,47 @@
+import React, { useCallback } from 'react';
 import { SelectChangeEvent } from '@mui/material';
-import { rowsInfo, setLeft, setCenter, setRight, RowStateSelectText } from '../lib/features/rowsInfoSlice';
+import { categoriesInfo, setLeft, setCenter, setRight, CategoryStateSelectText } from '../lib/features/categoriesInfoSlice';
 import Products from './Products';
 import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
-import { selectProductsByRow } from '../lib/selectors/selectors';
+import { selectProductsByCategory } from '../lib/selectors/selectors';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
-import RowHeader from './ui/CategoryHeader';
-import XIconDeletionRow from './ui/XIconDeletionRow';
+import CategoryHeader from './ui/CategoryHeader';
+import XIconDeletionCategory from './ui/XIconDeletionCategory';
 import ProductCard from './ProductCard';
 
-const Category = ({ category }: { category: rowsInfo }) => {
-    const { handleUpdateList, handleReorderRows, handleDragging, handleDragEnd, handleUpdateRows } = useDragAndDrop();
-    const products = useAppSelector(state => selectProductsByRow(state, category.id));
+interface CategoryProps {
+    category: categoriesInfo;
+}
+
+const Category = ({ category }: CategoryProps) => {
+    const { handleUpdateList, handleReorderCategories, handleDragging, handleDragEnd, handleUpdateCategories } = useDragAndDrop();
+    const products = useAppSelector(state => selectProductsByCategory(state, category.id));
     const dispatch = useAppDispatch();
 
-    const handleChange = (e: SelectChangeEvent) => {
+    const handleChange = useCallback((e: SelectChangeEvent) => {
         const value = e.target.value;
         switch (value) {
-            case RowStateSelectText.start:
+            case CategoryStateSelectText.start:
                 dispatch(setLeft(category.id));
                 break;
-            case RowStateSelectText.center:
+            case CategoryStateSelectText.center:
                 dispatch(setCenter(category.id));
                 break;
-            case RowStateSelectText.end:
+            case CategoryStateSelectText.end:
                 dispatch(setRight(category.id));
                 break;
             default:
                 break;
         }
-    };
+    }, [dispatch, category.id]);
 
     const handleDrop = (e: React.DragEvent<HTMLDivElement>): void => {
         e.preventDefault();
         const productTransfer = e.dataTransfer.getData('product');
-        const rowTransfer = e.dataTransfer.getData('category');
-        if(rowTransfer && !productTransfer) {
-            const rowTransfer = JSON.parse(e.dataTransfer.getData('category'));
-            handleReorderRows(rowTransfer.id, category.id);
+        const categoryTransfer = e.dataTransfer.getData('category');
+        if(categoryTransfer && !productTransfer) {
+            const categoryTransferParse = JSON.parse(e.dataTransfer.getData('category'));
+            handleReorderCategories(categoryTransferParse.id, category.id);
         } 
         if(productTransfer) {
             const product = JSON.parse(e.dataTransfer.getData('product'));
@@ -45,7 +50,7 @@ const Category = ({ category }: { category: rowsInfo }) => {
                 return;
             }
             handleUpdateList(product, category.id);
-            handleUpdateRows(product.category, category.id);
+            handleUpdateCategories(product.category, category.id);
         }
         handleDragging(false);
     };
@@ -53,7 +58,7 @@ const Category = ({ category }: { category: rowsInfo }) => {
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) =>
         e.preventDefault();
 
-    const handleDragStartRow = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDragStartCategories = (e: React.DragEvent<HTMLDivElement>) => {
         e.dataTransfer.setData('category', JSON.stringify(category));
         handleDragging(true);
     };
@@ -63,13 +68,13 @@ const Category = ({ category }: { category: rowsInfo }) => {
             <div key={category.id} className='flex flex-col justify-around w-full p-4 border rounded-lg'
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
-                onDragStart={handleDragStartRow} 
+                onDragStart={handleDragStartCategories} 
                 onDragEnd={handleDragEnd}
                 onPointerDown={e => e.stopPropagation()}
                 draggable
             >
-                <XIconDeletionRow category={category} />
-                <RowHeader category={category} handleChange={handleChange} />
+                <XIconDeletionCategory category={category} />
+                <CategoryHeader category={category} handleChange={handleChange} />
                 <Products  category={category}>
                     {products && products.map((product) => (
                         <ProductCard key={product.id} product={product}/>

@@ -12,20 +12,20 @@ const renderComponent = () => {
         </Provider>,
     );
 };
-describe('RowContainer', () => {    
-    it('renders RowContainer with children', () => {
+describe('CategoryContainer', () => {    
+    it('renders CategoryContainer with children', () => {
         const { getByText } = renderComponent();
 
         expect(getByText('Child Component')).toBeInTheDocument();
     });
 
-    it('renders RowContainer with Zoom Controls', () => {
+    it('renders CategoryContainer with Zoom Controls', () => {
         const { getByTestId } = renderComponent();
 
         expect(getByTestId('zoom-controls')).toBeInTheDocument();
     });
 
-    it('renders RowContainer with ShowAddRowComponent', () => {
+    it('renders CategoryContainer with ShowAddCategoryComponent', () => {
         const { getByTestId } = renderComponent();
 
         expect(getByTestId('add-category-button')).toBeInTheDocument();

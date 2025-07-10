@@ -1,11 +1,9 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { CircularProgress } from '@mui/material';
 import useZoom from '../lib/hooks/useZoom';
-import { useAppSelector } from '../lib/hooks';
 import ZoomInZoomOut from '../components/ui/ZoomInZoomOut';
-import ShowAddRowComponent from '../components/ShowAddRowComponent';
+import ShowAddCategoryComponent from '../components/ShowAddCategoryComponent';
 import './CategoryContainer.css';
 
 interface CategoryContainerProps {
@@ -29,7 +27,7 @@ const CategoryContainer = ({ children }: CategoryContainerProps) => {
                     transition: 'transform 0.2s ease',
                 }} >
                 {children}
-                <ShowAddRowComponent/>
+                <ShowAddCategoryComponent/>
             </div>
         </div>
     );

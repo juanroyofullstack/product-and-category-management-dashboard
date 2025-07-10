@@ -1,17 +1,15 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { addProductsOnFetch } from './productsInfoSlice';
-import { addRowsOnFetch } from './rowsInfoSlice';
+import { addCategoriesOnFetch } from './categoriesInfoSlice';
 import { getDashboardData } from '../api';
 
 interface DataState {
-    data: any[];
     loading: boolean;
     loaded: boolean;
     error: string | null;
 }
 
 const initialState: DataState = {
-    data: [],
     loading: false,
     loaded: true,
     error: null,
@@ -26,7 +24,7 @@ export const fetchData = createAsyncThunk<any>(
             const data = await response.data;
 
             dispatch(addProductsOnFetch(data.products));
-            dispatch(addRowsOnFetch(data.categories));
+            dispatch(addCategoriesOnFetch(data.categories));
 
             return data;
         } catch (error: any) {
@@ -50,11 +48,6 @@ const dataFetchSlice = createSlice({
                 state.loading = false;
                 state.loaded = true;
                 state.error = null;
-                if (action.payload) {
-                    state.data = action.payload.products;
-                } else {
-                    state.data = [];
-                }
             })
             .addCase(fetchData.rejected, (state, action) => {
                 state.loading = false;

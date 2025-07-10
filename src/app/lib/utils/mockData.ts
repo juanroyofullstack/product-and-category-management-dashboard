@@ -45,7 +45,7 @@ export const mockData = {
     loading: false,
     timestamp: new Date().toISOString(),
     totalProducts: 2,
-    totalRows: 3,
+    totalCategories: 3,
     version: '1.0.0',
     apiVersion: 'v1',
 };

@@ -2,21 +2,21 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { updateProduct, productsInfo } from '../features/productsInfoSlice';
-import { reorderRows, increaseRowProductCount, decreaseRowProductCount } from '../features/rowsInfoSlice';
+import { reorderCategory, increaseCategoryProductCount, decreaseCategoryProductCount } from '../features/categoriesInfoSlice';
 
 export const useDragAndDrop = () => {
     const [isDragging, setIsDragging] = useState(false);
     const dispatch = useDispatch();
 
-    const handleUpdateList = (product: productsInfo, rowId: number): void => {
-        dispatch(updateProduct({ productId: product.id, rowId: rowId}));
+    const handleUpdateList = (product: productsInfo, categoryId: number): void => {
+        dispatch(updateProduct({ productId: product.id, categoryId: categoryId}));
     };
-    const handleReorderRows = (fromRowId: number, toRowId: number): void => {
-        dispatch(reorderRows({ fromRowId, toRowId }));
+    const handleReorderCategories = (fromCategoryId: number, toCategoryId: number): void => {
+        dispatch(reorderCategory({ fromCategoryId, toCategoryId }));
     };
-    const handleUpdateRows = (productRowId: number, rowId: number): void => {
-        dispatch(increaseRowProductCount(rowId));
-        dispatch(decreaseRowProductCount(productRowId));
+    const handleUpdateCategories  = (productCategoryId: number, categoryId: number): void => {
+        dispatch(increaseCategoryProductCount(categoryId));
+        dispatch(decreaseCategoryProductCount(productCategoryId));
     };
     const handleDragging = (dragging: boolean) => setIsDragging(dragging);
     const handleDragEnd = () => handleDragging(false);
@@ -24,8 +24,8 @@ export const useDragAndDrop = () => {
     return {
         isDragging,
         handleUpdateList,
-        handleReorderRows,
-        handleUpdateRows,
+        handleReorderCategories,
+        handleUpdateCategories,
         handleDragging,
         handleDragEnd,
     };

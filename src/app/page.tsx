@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
-import RowContainer from './containers/CategoryContainer';
-import { selectRows, selectDataIsLoading, selectDataIsFetchedWithoutErrors, selectDataIsLoadedWithErrors } from './lib/selectors/selectors';
+import CategoryContainer from './containers/CategoryContainer';
+import { selectCategory, selectDataIsLoading, selectDataIsFetchedWithoutErrors, selectDataIsLoadedWithErrors } from './lib/selectors/selectors';
 import { useAppSelector, useAppDispatch } from './lib/hooks';
 import { fetchData } from './lib/features/dataFetchSlice';
 import Category from './components/Category';
@@ -32,12 +32,12 @@ const theme = createTheme({
 });
 
 export default function Home() {
-    const categories = useAppSelector(selectRows);
+    const categories = useAppSelector(selectCategory);
     const isDataLoading = useAppSelector(selectDataIsLoading);
     const isDataLoadedWithoutError = useAppSelector(selectDataIsFetchedWithoutErrors);
     const isDataWithError = useAppSelector(selectDataIsLoadedWithErrors);
     
-    const hasRows = categories.length > 0;
+    const hasCategories = categories.length > 0;
 
     const dispatch = useAppDispatch();
 
@@ -54,21 +54,21 @@ export default function Home() {
                         <CircularProgress />
                     </div>
                 )}
-                {isDataLoadedWithoutError && hasRows && (
-                    <RowContainer>
+                {isDataLoadedWithoutError && hasCategories && (
+                    <CategoryContainer>
                         {categories.map((category) => (
                             <div key={category.id} className='w-full'>
                                 <Category category={category} />
                             </div>
                         ))}
-                    </RowContainer>
+                    </CategoryContainer>
                 )}
                 {isDataWithError && (
                     <div className="flex items-center justify-center w-full h-full pt-40">
                         <p className="text-red-500">Error loading data. Please try again later.</p>
                     </div>
                 )}
-                {!isDataLoading && !hasRows && (
+                {!isDataLoading && !hasCategories && (
                     <div className="flex items-center justify-center w-full h-full pt-40">
                         <p className="text-gray-500">No categories available. Please add a category.</p>
                     </div>

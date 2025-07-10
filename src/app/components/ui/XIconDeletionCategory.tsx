@@ -1,22 +1,22 @@
 import { DragIndicator } from '@mui/icons-material';
-import { rowsInfo } from '../../lib/features/rowsInfoSlice';
-import RefactoredDeletionModal from '../DeletionModal';
+import { categoriesInfo } from '../../lib/features/categoriesInfoSlice';
+import DeletionModal from '../DeletionModal';
 
-interface XIconDeletionRowProps {
-    category: rowsInfo;
+interface XIconDeletionCategoryProps {
+    category: categoriesInfo;
 }
 
-const XIconDeletionRow = ({
+const XIconDeletionCategory = ({
     category,
-}: XIconDeletionRowProps) => { 
+}: XIconDeletionCategoryProps) => { 
     return (
         <div className="flex flex-category justify-between items-center gap-4" data-testid="x-icon-deletion-category">
             <div className="w-min">
                 <DragIndicator className="cursor-move text-gray-500 hover:text-gray-700" />
             </div>
-            <RefactoredDeletionModal rowId={category.id} />
+            <DeletionModal categoryId={category.id} />
         </div>
     );
 };
 
-export default XIconDeletionRow;
+export default XIconDeletionCategory;

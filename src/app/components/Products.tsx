@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import { rowsInfo } from '../lib/features/rowsInfoSlice';
+import { categoriesInfo } from '../lib/features/categoriesInfoSlice';
 import AddProductModal from './AddProductModal';
 
 interface ProductsProps {
-    category: rowsInfo;
+    category: categoriesInfo;
     children: ReactNode;
 }
 
@@ -20,7 +20,7 @@ const Products = ({ category, children }: ProductsProps) => {
                 {children}
             </div>   
             <div className="flex items-center justify-end w-full h-full gap-4">
-                {category.productsCount < 3 && <AddProductModal rowId={category.id} />}
+                {category.productsCount < 3 && <AddProductModal categoryId={category.id} />}
             </div>  
         </>
     );

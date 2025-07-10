@@ -1,16 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export const productsMockData = [
-    {
-        id: 1,
-        title: 'Product 1', 
-        description: 'Description for Product 1',
-        image: 'https://via.placeholder.com/150',
-        price: 19.99,
-        category: 1,
-    },
-];
-
 export interface productsInfo {
     id: number;
     title: string;
@@ -35,13 +24,13 @@ export const productsInfoSlice = createSlice({
         removeProduct: (state, action: PayloadAction<number>) => {
             return state.filter((product) => product.id !== action.payload);
         },
-        removeAllProductsAsociatedToRow: (state, action: PayloadAction<number>) => {
+        removeAllProductsAsociatedToCategory: (state, action: PayloadAction<number>) => {
             return state.filter((product) => product.category !==  action.payload);
         },
-        updateProduct: (state, action: PayloadAction<{ productId: number; rowId: number; }>) => {
+        updateProduct: (state, action: PayloadAction<{ productId: number; categoryId: number; }>) => {
             const index = state.findIndex(product => product.id === action.payload.productId);
             if (index !== -1) {
-                state[index].category = action.payload.rowId;
+                state[index].category = action.payload.categoryId;
             }
         },
     },
@@ -51,7 +40,7 @@ export const {
     addProductsOnFetch,
     addProduct,
     removeProduct,
-    removeAllProductsAsociatedToRow,
+    removeAllProductsAsociatedToCategory,
     updateProduct,
 } = productsInfoSlice.actions;
 

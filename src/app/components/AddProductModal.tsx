@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Button } from '@mui/material';
 import { useAppDispatch } from '../lib/hooks';
-import { increaseRowProductCount } from '../lib/features/rowsInfoSlice';
+import { increaseCategoryProductCount } from '../lib/features/categoriesInfoSlice';
 
 import { addProduct } from '../lib/features/productsInfoSlice';
 
@@ -19,7 +19,7 @@ const style = {
     p: 4,
 };
 
-export default function AddProductModal({ rowId }: { rowId: number }) {
+export default function AddProductModal({ categoryId }: { categoryId: number }) {
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [price, setPrice] = useState('');
@@ -80,9 +80,9 @@ export default function AddProductModal({ rowId }: { rowId: number }) {
                 description,
                 image: finalImageUrl,
                 price: parseFloat(price),
-                category: rowId,
+                category: categoryId,
             }));
-            dispatch(increaseRowProductCount(rowId));
+            dispatch(increaseCategoryProductCount(categoryId));
             handleClose();
         } catch {
             alert('Error uploading image. Please try again.');
