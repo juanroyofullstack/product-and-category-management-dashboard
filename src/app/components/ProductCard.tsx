@@ -6,7 +6,11 @@ import { useDragAndDrop } from '../lib/hooks/useDragAndDrop';
 import DeletionModal from './DeletionModal';
 import './ProductCard.css';
 
-const ProductCard = ({ product }: { product: productsInfo })=> {
+interface ProductCardProps {
+    product: productsInfo;
+}
+
+const ProductCard = ({ product }: ProductCardProps)=> {
     const { handleDragging, handleDragEnd } = useDragAndDrop();
     const [imageError, setImageError] = useState(false);
 
@@ -17,7 +21,7 @@ const ProductCard = ({ product }: { product: productsInfo })=> {
 
     return ( 
         <div key={product.id} 
-            className="ProductCard flex flex-col justify-around p-4 border break-words rounded"
+            className="ProductCard flex flex-col justify-between p-4 border break-words rounded"
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             onPointerDown={e => e.stopPropagation()}
@@ -46,7 +50,7 @@ const ProductCard = ({ product }: { product: productsInfo })=> {
                     )}
                 </div>
             )}
-            <div className="">
+            <div>
                 {product.description &&
                  <p className="text-sm text-gray-600 mb-2">
                      {product.description}

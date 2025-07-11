@@ -52,6 +52,7 @@ yarn start        # Inicia el servidor de producción
 # Testing
 yarn test         # Ejecuta los tests
 yarn test:watch   # Ejecuta los tests en modo watch
+yarn test -- --coverage  # Ejecuta el test coverage del proyecto
 
 # Linting
 yarn lint         # Ejecuta ESLint
@@ -120,21 +121,7 @@ yarn test:watch
 ### Cobertura de Tests
 - Componentes principales
 
-## 🔄 Estado de la Aplicación
-
-La aplicación utiliza Redux Toolkit para el manejo del estado global:
-
-### Slices Principales
-- **`categoriesInfoSlice`**: Gestión de categorías
-- **`productsInfoSlice`**: Gestión de productos  
-- **`dataFetchSlice`**: Estados de carga y errores
-
-### Hooks Personalizados
-- **`useDragAndDrop`**: Lógica de drag & drop
-- **`useZoom`**: Control de zoom
-- **`useClickOutside`**: Detección de clicks fuera
-
-## 📱 Responsive Design
+## Responsive Design
 
 La aplicación está optimizada para:
 - 📱 **Mobile**: < 600px
@@ -146,3 +133,9 @@ La aplicación está optimizada para:
 yarn build
 yarn start
 ```
+
+## Futuros Enhancements
+- Continuar con la mejora de UI
+- Añadir vista de detalle de productos
+- Añadir perfil de usuario y diferentes proyectos
+- Aumentar covertura de testing
