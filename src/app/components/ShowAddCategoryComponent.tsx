@@ -1,8 +1,8 @@
 import React, { useState, FormEvent } from 'react';
 import { Button, Box } from '@mui/material';
-import { useAppDispatch } from '../lib/hooks';
-import useClickOutside from '../lib/hooks/useClickOutside';
 import { addCategory, CategoryState } from '../lib/features/categoriesInfoSlice';
+import useClickOutside from '../lib/hooks/useClickOutside';
+import { useAppDispatch } from '../lib/hooks';
 
 const ShowAddCategoryComponent = () => {
     const [categoryName, setCategoryName] = useState('');
@@ -39,7 +39,7 @@ const ShowAddCategoryComponent = () => {
                     <input
                         type="text"
                         placeholder="Enter category title"
-                        className="p-2 border rounded"
+                        className="p-2 border rounded text-black"
                         onChange={(e) => setCategoryName(e.target.value)}
                         data-testid="category-name-input"
                     />

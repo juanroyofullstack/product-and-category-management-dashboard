@@ -1,9 +1,7 @@
-'use client';
-
 import { ReactNode } from 'react';
-import useZoom from '../lib/hooks/useZoom';
 import ZoomInZoomOut from '../components/ui/ZoomInZoomOut';
 import ShowAddCategoryComponent from '../components/ShowAddCategoryComponent';
+import useZoom from '../lib/hooks/useZoom';
 import './CategoryContainer.css';
 
 interface CategoryContainerProps {
@@ -27,7 +25,6 @@ const CategoryContainer = ({ children }: CategoryContainerProps) => {
                     transition: 'transform 0.2s ease',
                 }} >
                 {children}
-                <ShowAddCategoryComponent/>
             </div>
         </div>
     );

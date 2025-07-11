@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Product & Category Management Dashboard
 
-## Getting Started
+Una aplicación web moderna para la gestión de productos y categorías con funcionalidades de drag & drop, desarrollada como parte de una prueba técnica para Inditex.
 
-First, run the development server:
+## Características Principales
+
+- **Gestión de Categorías**: Crear, editar, eliminar y reordenar categorías
+- **Gestión de Productos**: Añadir productos con imagen, título, descripción y precio
+- **Drag & Drop**: Mover productos entre categorías y reordenar categorías intuitivamente
+- **Responsive Design**: Interfaz adaptable a diferentes tamaños de pantalla
+- **Control de Zoom**: Funcionalidad de zoom in/out para mejor visualización
+- **Subida de Imágenes**: Upload de archivos de imagen para productos
+- **Estado Global**: Gestión del estado con Redux Toolkit
+- **Testing**: Suite completa de tests unitarios
+
+## Stack Tecnológico
+
+- **Frontend**: Next.js 15.3.4 con App Router
+- **UI**: Material-UI (MUI) + Tailwind CSS
+- **Estado**: Redux Toolkit + React Redux
+- **Testing**: Jest + Testing Library
+- **TypeScript**: Tipado estático completo
+- **Linting**: ESLint + Prettier
+- **Hooks**: Husky para pre-commit hooks
+
+## Instalación
 
 ```bash
-npm run dev
-# or
+# Clonar el repositorio
+git clone <repository-url>
+cd inditex-prueba
+
+# Instalar dependencias
+yarn install
+
+# Ejecutar en modo desarrollo
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000) para ver la aplicación.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts Disponibles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Desarrollo
+yarn dev          # Inicia el servidor de desarrollo con Turbopack
 
-## Learn More
+# Producción
+yarn build        # Construye la aplicación para producción
+yarn start        # Inicia el servidor de producción
 
-To learn more about Next.js, take a look at the following resources:
+# Testing
+yarn test         # Ejecuta los tests
+yarn test:watch   # Ejecuta los tests en modo watch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Linting
+yarn lint         # Ejecuta ESLint
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Arquitectura del Proyecto
 
-## Deploy on Vercel
+```
+src/
+├── app/
+│   ├── components/          # Componentes reutilizables
+│   │   ├── ui/             # Componentes de UI básicos
+│   │   ├── AddProductModal.tsx
+│   │   ├── Category.tsx
+│   │   ├── ProductCard.tsx
+│   │   └── ...
+│   ├── containers/         # Contenedores de alto nivel
+│   ├── lib/
+│   │   ├── features/       # Redux slices
+│   │   ├── hooks/          # Hooks personalizados
+│   │   ├── selectors/      # Selectores de Redux
+│   │   └── utils/          # Utilidades y mock data
+│   ├── api/               # Rutas de API
+│   └── globals.css        # Estilos globales
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Funcionalidades Detalladas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Gestión de Categorías
+- Crear nuevas categorías
+- Eliminar categorías (con confirmación)
+- Reordenar categorías por drag & drop
+- Cambiar alineación (Left/Center/Right)
+- Control automático del contador de productos
+
+### Gestión de Productos
+- Añadir productos con formulario modal
+- Upload de imágenes con preview
+- Validación de formularios
+- Drag & drop entre categorías
+- Eliminación con confirmación
+- Límite de 3 productos por categoría
+
+### Características de UX
+- Loading states durante fetch de datos
+- Manejo de errores
+- Confirmaciones de eliminación
+- Feedback visual durante interacciones
+- Design responsivo
+
+## Testing
+
+El proyecto incluye una suite completa de tests unitarios:
+
+```bash
+# Ejecutar todos los tests
+yarn test
+
+# Ejecutar tests con cobertura
+yarn test --coverage
+
+# Ejecutar tests en modo watch
+yarn test:watch
+```
+
+### Cobertura de Tests
+- Componentes principales
+
+## 🔄 Estado de la Aplicación
+
+La aplicación utiliza Redux Toolkit para el manejo del estado global:
+
+### Slices Principales
+- **`categoriesInfoSlice`**: Gestión de categorías
+- **`productsInfoSlice`**: Gestión de productos  
+- **`dataFetchSlice`**: Estados de carga y errores
+
+### Hooks Personalizados
+- **`useDragAndDrop`**: Lógica de drag & drop
+- **`useZoom`**: Control de zoom
+- **`useClickOutside`**: Detección de clicks fuera
+
+## 📱 Responsive Design
+
+La aplicación está optimizada para:
+- 📱 **Mobile**: < 600px
+- 💻 **Desktop**: > 1100px
+- 📐 **Breakpoints intermedios**
+
+### Build Manual
+```bash
+yarn build
+yarn start
+```

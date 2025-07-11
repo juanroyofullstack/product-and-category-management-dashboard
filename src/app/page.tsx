@@ -4,10 +4,16 @@ import { useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header';
-import CategoryContainer from './containers/CategoryContainer';
-import { selectCategory, selectDataIsLoading, selectDataIsFetchedWithoutErrors, selectDataIsLoadedWithErrors } from './lib/selectors/selectors';
-import { useAppSelector, useAppDispatch } from './lib/hooks';
 import { fetchData } from './lib/features/dataFetchSlice';
+import { 
+    selectCategory, 
+    selectDataIsLoading, 
+    selectDataIsFetchedWithoutErrors, 
+    selectDataIsLoadedWithErrors } 
+    from './lib/selectors/selectors';
+import CategoryContainer from './containers/CategoryContainer';
+import { useAppSelector, useAppDispatch } from './lib/hooks';
+import ShowAddCategoryComponent from './components/ShowAddCategoryComponent';
 import Category from './components/Category';
 
 const theme = createTheme({
@@ -47,13 +53,8 @@ export default function Home() {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className="flex flex-col items-center justify-center w-full h-full gap-4">
+            <div className="flex flex-col items-center justify-center w-full h-full pb-4 gap-4">
                 <Header />
-                {isDataLoading && (
-                    <div className="flex items-center justify-center w-full h-full pt-40">
-                        <CircularProgress />
-                    </div>
-                )}
                 {isDataLoadedWithoutError && hasCategories && (
                     <CategoryContainer>
                         {categories.map((category) => (
@@ -63,15 +64,23 @@ export default function Home() {
                         ))}
                     </CategoryContainer>
                 )}
+                {isDataLoading && (
+                    <div className="flex items-center justify-center w-full h-full pt-40">
+                        <CircularProgress />
+                    </div>
+                )}
                 {isDataWithError && (
                     <div className="flex items-center justify-center w-full h-full pt-40">
                         <p className="text-red-500">Error loading data. Please try again later.</p>
                     </div>
                 )}
-                {!isDataLoading && !hasCategories && (
+                {!isDataLoading && !hasCategories && isDataLoadedWithoutError &&(
                     <div className="flex items-center justify-center w-full h-full pt-40">
                         <p className="text-gray-500">No categories available. Please add a category.</p>
                     </div>
+                )}
+                {!isDataLoading && (
+                    <ShowAddCategoryComponent/>
                 )}
             </div>
         </ThemeProvider>

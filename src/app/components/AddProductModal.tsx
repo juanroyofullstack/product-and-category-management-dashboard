@@ -5,19 +5,7 @@ import Modal from '@mui/material/Modal';
 import { Button } from '@mui/material';
 import { useAppDispatch } from '../lib/hooks';
 import { increaseCategoryProductCount } from '../lib/features/categoriesInfoSlice';
-
 import { addProduct } from '../lib/features/productsInfoSlice';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    border: '1px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
 
 export default function AddProductModal({ categoryId }: { categoryId: number }) {
     const [open, setOpen] = useState(false);
@@ -101,9 +89,9 @@ export default function AddProductModal({ categoryId }: { categoryId: number }) 
                 aria-describedby="modal-modal-description"
 
             >
-                <Box sx={style} 
+                <Box 
                     component="form"
-                    className='bg-white'
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-black shadow-2xl p-4 bg-white"
                     onSubmit={e => {
                         handleSubmit(e);
                     }}

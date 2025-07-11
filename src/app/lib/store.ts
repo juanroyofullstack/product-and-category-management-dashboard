@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productsInfoSlice from './features/productsInfoSlice';
 import categoriesInfoSlice from './features/categoriesInfoSlice';
 import dataFetch from './features/dataFetchSlice';
-
+import productsInfoSlice from './features/productsInfoSlice';
 import { getDashboardData } from './api';
 
 export const store = configureStore({

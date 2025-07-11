@@ -11,7 +11,7 @@ interface DataState {
 
 const initialState: DataState = {
     loading: false,
-    loaded: true,
+    loaded: false,
     error: null,
 };
 

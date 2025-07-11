@@ -13,14 +13,6 @@ export interface ModalProps {
     isCategory?: boolean;
 }
 
-export interface DeletionModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onConfirm: () => void;
-    title: string;
-    description: string;
-}
-
 export const DeletionModal = ({ 
     categoryId, 
     product, 
