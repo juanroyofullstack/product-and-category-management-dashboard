@@ -90,9 +90,9 @@ src/
 
 ### Gestión de Productos
 - Añadir productos con formulario modal
-- Upload de imágenes con preview
+- Upload de imágenes
 - Validación de formularios
-- Drag & drop entre categorías
+- Drag & drop entre categorías y productos
 - Eliminación con confirmación
 - Límite de 3 productos por categoría
 
@@ -100,7 +100,6 @@ src/
 - Loading states durante fetch de datos
 - Manejo de errores
 - Confirmaciones de eliminación
-- Feedback visual durante interacciones
 - Design responsivo
 
 ## Testing
@@ -126,7 +125,6 @@ yarn test:watch
 La aplicación está optimizada para:
 - 📱 **Mobile**: < 600px
 - 💻 **Desktop**: > 1100px
-- 📐 **Breakpoints intermedios**
 
 ### Build Manual
 ```bash
