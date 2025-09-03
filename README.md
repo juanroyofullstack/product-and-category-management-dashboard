@@ -1,6 +1,6 @@
 # Product & Category Management Dashboard
 
-Una aplicación web moderna para la gestión de productos y categorías con funcionalidades de drag & drop, desarrollada como parte de una prueba técnica para Inditex.
+Una aplicación web moderna para la gestión de productos y categorías con funcionalidades de drag & drop.
 
 ## Características Principales
 
