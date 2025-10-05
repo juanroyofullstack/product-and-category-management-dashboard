@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Header from './components/Header';
 import { fetchData } from './lib/features/dataFetchSlice';
 import { 
     selectCategory, 
@@ -12,8 +11,9 @@ import {
     selectDataIsLoadedWithErrors } 
     from './lib/selectors/selectors';
 import CategoryContainer from './containers/CategoryContainer';
-import { useAppSelector, useAppDispatch } from './lib/hooks';
+import Header from './components/Header';
 import ShowAddCategoryComponent from './components/ShowAddCategoryComponent';
+import { useAppSelector, useAppDispatch } from './lib/hooks';
 import Category from './components/Category';
 
 const theme = createTheme({
@@ -62,6 +62,9 @@ export default function Home() {
                                 <Category category={category} />
                             </div>
                         ))}
+                        {!isDataLoading && (
+                            <ShowAddCategoryComponent/>
+                        )}
                     </CategoryContainer>
                 )}
                 {isDataLoading && (
@@ -78,9 +81,6 @@ export default function Home() {
                     <div className="flex items-center justify-center w-full h-full pt-40">
                         <p className="text-gray-500">No categories available. Please add a category.</p>
                     </div>
-                )}
-                {!isDataLoading && (
-                    <ShowAddCategoryComponent/>
                 )}
             </div>
         </ThemeProvider>
