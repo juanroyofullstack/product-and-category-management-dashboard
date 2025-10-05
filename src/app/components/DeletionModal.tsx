@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../lib/hooks';
 import { removeAllProductsAsociatedToCategory, removeProduct } from '../lib/features/productsInfoSlice';
 import type { productsInfo } from '../lib/features/productsInfoSlice';
 import { removeCategory, decreaseCategoryProductCount } from '../lib/features/categoriesInfoSlice';
+import { useAppSelector, useAppDispatch } from '../lib/hooks';
 import DeletionTrigger from './ui/DeletionTrigger';
 import UiModal from './ui/UiModal';
 

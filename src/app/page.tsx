@@ -10,11 +10,11 @@ import {
     selectDataIsFetchedWithoutErrors, 
     selectDataIsLoadedWithErrors } 
     from './lib/selectors/selectors';
-import CategoryContainer from './containers/CategoryContainer';
+import Category from './components/Category';
 import Header from './components/Header';
 import ShowAddCategoryComponent from './components/ShowAddCategoryComponent';
+import CategoryContainer from './containers/CategoryContainer';
 import { useAppSelector, useAppDispatch } from './lib/hooks';
-import Category from './components/Category';
 
 const theme = createTheme({
     palette: {

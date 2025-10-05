@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import Image from 'next/image';
 import ImageNotSupportedIcon from '@mui/icons-material/ImageNotSupported';
 import { productsInfo } from '../lib/features/productsInfoSlice';
@@ -64,4 +64,4 @@ const ProductCard = ({ product }: ProductCardProps)=> {
     );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

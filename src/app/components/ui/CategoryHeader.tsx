@@ -1,9 +1,9 @@
-import { MenuItem, Select } from '@mui/material';
+import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { categoriesInfo, CategoryStateSelectText } from '../../lib/features/categoriesInfoSlice';
 
 interface CategoryHeaderProps {
     category: categoriesInfo;
-    handleChange: () => void;
+    handleChange: (e: SelectChangeEvent) => void;
 }
 
 const CategoryHeader = ({
